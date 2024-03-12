@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<instance>
+	<info>
+		<dataset />
+		<name />
+	</info>
+	<network>
+		<nodes>
+			<node>
+				<cx />
+				<cy />
+			</node>
+		</nodes>
+		<euclidean />
+		<decimals />
+	</network>
+	<fleet>
+		<vehicle_profile>
+			<departure_node />
+			<arrival_node />
+			<capacity />
+		</vehicle_profile>
+	</fleet>
+	<requests>
+		<request>
+			<quantity />
+		</request>
+	</requests>
+</instance>

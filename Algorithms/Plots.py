@@ -222,67 +222,69 @@ class DataAnt:
 
 
 # ************ ******* ** ANT PLOT ******* ******* *******
-def main():
-    cmtFile = "CMT12"
-
-    with open(f"../cmtResultAnt/results{cmtFile}.xml", "r+") as f:
-        dic = xmltodict.parse(f.read())
-        data = Extract(f"../Data/CMT/{cmtFile}.vrp")
-        file = open(f"../cmtResultAnt/results{cmtFile}.txt", "w")
-        i = 1
-        # for x in dic['results']['test']:
-        #     z = DataAnt(x, data)
-        #     nAnt = x['@nAnt']
-        #     nInter = x['@nInter']
-        #     z.plotBestResult(f"../cmtPlotsAnt/{cmtFile}/Routs/plot_{nAnt}_{nInter}.jpg")
-        #     file.write(z.__str__())
-        #     i += 1
-        best = Route(0, np.inf, 0, [], "")
-        for x in dic['results']['test']:
-            z = DataAnt(x, data)
-            nAnt = x['@nAnt']
-            nInter = x['@nInter']
-            x, y = 0, 0
-            # z.plotBestResult(f"../cmtPlotsAnt/{cmtFile}/Routs/plot_{nAnt}_{nInter}.jpg")
-            if z.bestResult().score < best.score:
-                best = z.bestResult()
-                x = z.nAnt
-                y = z.nInter
-            file.write(z.__str__())
-            i += 1
-        with open(f"../cmtResultAnt/bestResult{cmtFile}.txt", "w") as g:
-            g.write(f"{x} {y} {best.score} \n {best.route}")
-        best.plotRoute(f"../cmtPlotsAnt/{cmtFile}/bestRoutePlot.jpg")
-        file.close()
-
-
-# ************ ******* ** GENETIC PLOT ******* ******* *******
 # def main():
 #     cmtFile = "CMT12"
 #
-#     with open(f"../cmtResultGen/result_1_1/results{cmtFile}.xml", "r+") as f:
+#     with open(f"../cmtResultAnt/results{cmtFile}.xml", "r+") as f:
 #         dic = xmltodict.parse(f.read())
 #         data = Extract(f"../Data/CMT/{cmtFile}.vrp")
-#         file = open(f"../cmtResultGen/result_1_1/results{cmtFile}.txt", "w")
+#         file = open(f"../cmtResultAnt/results{cmtFile}.txt", "w")
 #         i = 1
+#         # for x in dic['results']['test']:
+#         #     z = DataAnt(x, data)
+#         #     nAnt = x['@nAnt']
+#         #     nInter = x['@nInter']
+#         #     z.plotBestResult(f"../cmtPlotsAnt/{cmtFile}/Routs/plot_{nAnt}_{nInter}.jpg")
+#         #     file.write(z.__str__())
+#         #     i += 1
 #         best = Route(0, np.inf, 0, [], "")
 #         for x in dic['results']['test']:
-#             z = DataAlgGen(x, data)
-#             cross = x['@crossOption']
-#             mutation = x['@mutationOption']
-#             population = x['@population']
-#             genCount = x['@generationCount']
-#             y = []
-#             # z.plotBestResult(f"../cmtPlotsGen/result_1_1/{cmtFile}/Routs/plot_{cross}_{mutation}_{population}_{genCount}.jpg")
+#             z = DataAnt(x, data)
+#             nAnt = x['@nAnt']
+#             nInter = x['@nInter']
+#             x, y = 0, 0
+#             # z.plotBestResult(f"../cmtPlotsAnt/{cmtFile}/Routs/plot_{nAnt}_{nInter}.jpg")
 #             if z.bestResult().score < best.score:
 #                 best = z.bestResult()
-#                 y = [z.cross, z.mut, z.popC, z.genC]
+#                 x = z.nAnt
+#                 y = z.nInter
 #             file.write(z.__str__())
 #             i += 1
-#         with open(f"../cmtResultGen/result_1_1/bestResult{cmtFile}.txt", "w") as g:
-#             g.write(f"{y} {best.score} \n {best.route}")
-#         best.plotRoute(f"../cmtPlotsGen/result_1_1/{cmtFile}/bestRoutePlot.jpg")
+#         with open(f"../cmtResultAnt/bestResult{cmtFile}.txt", "w") as g:
+#             g.write(f"{x} {y} {best.score} \n {best.route}")
+#         best.plotRoute(f"../cmtPlotsAnt/{cmtFile}/bestRoutePlot.jpg")
 #         file.close()
+
+
+# ************ ******* ** GENETIC PLOT ******* ******* *******
+def main():
+    cmtFile = "CMT12"
+    c = 1
+    m = 1
+
+    with open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.xml", "r+") as f:
+        dic = xmltodict.parse(f.read())
+        data = Extract(f"../Data/CMT/{cmtFile}.vrp")
+        file = open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.txt", "w")
+        i = 1
+        best = Route(0, np.inf, 0, [], "")
+        for x in dic['results']['test']:
+            z = DataAlgGen(x, data)
+            cross = x['@crossOption']
+            mutation = x['@mutationOption']
+            population = x['@population']
+            genCount = x['@generationCount']
+            y = []
+            # z.plotBestResult(f"../cmtPlotsGen/result_1_1/{cmtFile}/Routs/plot_{cross}_{mutation}_{population}_{genCount}.jpg")
+            if z.bestResult().score < best.score:
+                best = z.bestResult()
+                y = [z.cross, z.mut, z.popC, z.genC]
+            file.write(z.__str__())
+            i += 1
+        with open(f"../cmtResultGen/result_{c}_{m}/bestResult{cmtFile}.txt", "w") as g:
+            g.write(f"{y} {best.score} \n {best.route}")
+        best.plotRoute(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/bestRoutePlot.jpg")
+        file.close()
 
 
 if __name__ == "__main__":

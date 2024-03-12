@@ -32,7 +32,7 @@ def main():
     # populationOptions = (5, 10, 20, 40, 80, 160)
     # generationOptions = (10, 20, 40, 80, 160, 320)
 
-    crossOptions = (0.25, 0)
+    crossOptions = (0.05, 0.25)
     mutationOptions = (0.01, 0.2)
     populationOptions = (5, 10, 20, 40)
     generationOptions = (10, 20, 40, 80)

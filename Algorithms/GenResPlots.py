@@ -28,8 +28,10 @@ class ParsedData:
 
 def main():
     cmtFile = "CMT12"
+    c = 1
+    m = 1
 
-    with open(f"../cmtResultGen/result_1_1/results{cmtFile}.txt", "r") as f:
+    with open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.txt", "r") as f:
         data = f.read().split("\n")
         elements = [ParsedData(x) for x in data if x != ""]
     criteria = (0.05, 0.2, 20)
@@ -43,7 +45,7 @@ def main():
     plt.ylabel("Distance")
     plt.tight_layout()
     plt.pause(0.1)
-    plt.savefig(f"../cmtPlotsGen/result_1_1/{cmtFile}/resultMinAvgMax.jpg")
+    plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultMinAvgMax.jpg")
     plt.close()
 
     crit = (0.05, 0.01)# cross, mutation
@@ -58,7 +60,7 @@ def main():
     plt.xlabel("Generation count")
     plt.tight_layout()
     plt.pause(0.1)
-    plt.savefig(f"../cmtPlotsGen/result_1_1/{cmtFile}/resultTime.jpg")
+    plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultTime.jpg")
     plt.close()
 
 
@@ -71,10 +73,10 @@ def main():
     plt.legend(bbox_to_anchor=(0.5, 1.3), loc='upper center')
     plt.ylabel("%")
     plt.xlabel("Generation count")
-    plt.ylim((7.5, 20))
+    plt.ylim((8, 10))
     plt.tight_layout()
     plt.pause(0.1)
-    plt.savefig(f"../cmtPlotsGen/result_1_1/{cmtFile}/resultLostCap.jpg")
+    plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultLostCap.jpg")
     plt.close()
 
 

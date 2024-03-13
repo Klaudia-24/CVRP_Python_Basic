@@ -27,8 +27,8 @@ class ParsedData:
 
 
 def main():
-    cmtFile = "CMT12"
-    c = 1
+    cmtFile = "CMT1"
+    c = 2
     m = 1
 
     with open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.txt", "r") as f:
@@ -73,7 +73,7 @@ def main():
     plt.legend(bbox_to_anchor=(0.5, 1.3), loc='upper center')
     plt.ylabel("%")
     plt.xlabel("Generation count")
-    plt.ylim((8, 10))
+    # plt.ylim((8, 10))
     plt.tight_layout()
     plt.pause(0.1)
     plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultLostCap.jpg")

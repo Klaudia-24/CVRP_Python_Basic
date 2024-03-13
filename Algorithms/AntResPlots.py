@@ -23,13 +23,14 @@ class ParsedData:
 
 
 def main():
-    cmtFile = "CMT12"
+    cmtFile = "CMT1"
 
     with open(f"../cmtResultAnt/results{cmtFile}.txt", "r") as f:
         data = f.read().split("\n")
         elements = [ParsedData(x) for x in data if x != ""]
     criteria = (10, 20, 40, 60)
-    selected = [a for a in elements if a.nAnt == criteria[0]]
+    selCrit = criteria[3]
+    selected = [a for a in elements if a.nAnt == selCrit]
 
     plt.plot([x.nIter for x in selected], [x.minScore for x in selected], label="Min")
     plt.plot([x.nIter for x in selected], [x.avgScore for x in selected], label="Avg")
@@ -40,7 +41,7 @@ def main():
     plt.tight_layout()
     plt.xticks(ticks=[x.nIter for x in selected])
     plt.pause(0.1)
-    plt.savefig(f"../cmtPlotsAnt/{cmtFile}/resultMinAvgMax.jpg")
+    plt.savefig(f"../cmtPlotsAnt/{cmtFile}/resultMinAvgMax_{selCrit}.jpg")
     plt.close()
 
     # plt.plot([x.nIter for x in selected], [x.avgTime for x in selected], label="Execution time")
@@ -52,7 +53,7 @@ def main():
 
     for i in criteria:
         selected = [a for a in elements if a.nAnt == i]
-        plt.plot([x.nIter for x in selected], [x.avgTime for x in selected], label=f"Execution time {i}")
+        plt.plot([x.nIter for x in selected], [x.avgTime for x in selected], label=f"{i} ants")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.ylabel("time [s]")
     plt.xlabel("Iteration count")
@@ -65,13 +66,13 @@ def main():
     z = [-4, -2, 0, 2]
     for i, j in zip(criteria, z):
         selected = [a for a in elements if a.nAnt == i]
-        plt.bar([x.nIter + j for x in selected], [(1-x.lostCap)*100 for x in selected], label=f"Unused capacity {i}", width=2)
+        plt.bar([x.nIter + j for x in selected], [(1-x.lostCap)*100 for x in selected], label=f"{i} ants", width=2)
     plt.xlabel("Iteration count")
     plt.ylabel("%")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.tight_layout()
     plt.xticks(ticks=[x.nIter for x in selected])
-    plt.ylim((9.25, 10))
+    # plt.ylim((9.25, 10))
     plt.pause(0.1)
     plt.savefig(f"../cmtPlotsAnt/{cmtFile}/resultLostCap.jpg")
     plt.close()
@@ -79,11 +80,9 @@ def main():
     z = [-4, -2, 0, 2]
     for i, j in zip(criteria, z):
         selected = [a for a in elements if a.nAnt == i]
-        plt.bar([x.nIter + j for x in selected], [x.avgScore for x in selected],
-                label=f"Average cost {i}", width=2)
+        plt.bar([x.nIter + j for x in selected], [x.avgScore for x in selected], label=f"{i} ants", width=2)
     plt.xlabel("Iteration count")
-    plt.xlabel("??????")
-    # plt.ylabel("%")
+    plt.ylabel("??????")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.tight_layout()
     plt.xticks(ticks=[x.nIter for x in selected])
@@ -94,8 +93,7 @@ def main():
     z = [-4, -2, 0, 2]
     for i, j in zip(criteria, z):
         selected = [a for a in elements if a.nAnt == i]
-        plt.bar([x.nIter + j for x in selected], [x.avgScore for x in selected],
-                label=f"Average cost {i}", width=2)
+        plt.bar([x.nIter + j for x in selected], [x.avgScore for x in selected], label=f"{i} ants", width=2)
     plt.xlabel("Iteration count")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.tight_layout()

@@ -37,9 +37,9 @@ def main():
     populationOptions = (5, 10, 20, 40)
     generationOptions = (10, 20, 40, 80)
     # files = (1, 2, 3, 4, 5, 11, 12)
-    files = (12, 11)
+    files = (12, 1)
     for fileIndex in files:
-        resultFileName = f"../cmtResultGen/result_2_2/resultsCMT{fileIndex}_2.xml"
+        resultFileName = f"../cmtResultGen/result_1_2/resultsCMT{fileIndex}_test.xml"
 
         file = open(resultFileName, "a+")
         file.write('<?xml version="1.0" encoding="UTF-8"?>\n')

@@ -75,7 +75,7 @@ class GeneticAlgorithm:
     #     routeToScore.append(0)
     #     return sum([distance(self.nodesDistance[routeToScore[i-1]],self.nodesDistance[routeToScore[i]]) for i in range(1,len(routeToScore))])
 
-    def run(self, sel=1, crossOpt=2, mutOpt=2):
+    def run(self, sel=1, crossOpt=1, mutOpt=2):
         index = 0
         while index < self.genCount:
             newPop = []

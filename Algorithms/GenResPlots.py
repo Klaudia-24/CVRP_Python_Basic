@@ -28,13 +28,17 @@ class ParsedData:
 
 def main():
     cmtFile = "CMT1"
-    c = 2
-    m = 1
+    c = 1
+    m = 2
 
     with open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.txt", "r") as f:
         data = f.read().split("\n")
         elements = [ParsedData(x) for x in data if x != ""]
-    criteria = (0.05, 0.2, 20)
+    # crossOptions = (0.05, 0.25)
+    # mutationOptions = (0.01, 0.2)
+    # populationOptions = (5, 10, 20, 40)
+    # generationOptions = (10, 20, 40, 80)
+    criteria = (0.05, 0.2, 5)
     selected = [a for a in elements if a.cross == criteria[0] and a.mut == criteria[1] and a.popC == criteria[2]]
     plt.plot([x.genC for x in selected], [x.minScore for x in selected], label="Min")
     plt.plot([x.genC for x in selected], [x.avgScore for x in selected], label="Avg")
@@ -45,15 +49,30 @@ def main():
     plt.ylabel("Distance")
     plt.tight_layout()
     plt.pause(0.1)
-    plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultMinAvgMax.jpg")
+    plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultMinAvgMax{criteria[2]}.jpg")
     plt.close()
+
+    criteria = (0.05, 0.2, 40)
+    selected = [a for a in elements if a.cross == criteria[0] and a.mut == criteria[1] and a.popC == criteria[2]]
+    plt.plot([x.genC for x in selected], [x.minScore for x in selected], label="Min")
+    plt.plot([x.genC for x in selected], [x.avgScore for x in selected], label="Avg")
+    plt.plot([x.genC for x in selected], [x.maxScore for x in selected], label="Max")
+    plt.xticks(ticks=[x.genC for x in selected])
+    plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+    plt.xlabel("Generation count")
+    plt.ylabel("Distance")
+    plt.tight_layout()
+    plt.pause(0.1)
+    plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultMinAvgMax{criteria[2]}.jpg")
+    plt.close()
+
 
     crit = (0.05, 0.01)# cross, mutation
     z = [-3, -1.5, 0, 1.5]
     crit_2 = [5, 10, 20, 40] # populationOptions
     for i, j in zip(crit_2, z):
         selected = [a for a in elements if a.cross == crit[0] and a.mut == crit[1] and a.popC == i]
-        plt.plot([x.genC for x in selected], [x.avgTime for x in selected], label=f"Execution time {i}")
+        plt.plot([x.genC for x in selected], [x.avgTime for x in selected], label=f"{i} population")
     plt.xticks(ticks=[x.genC for x in selected])
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.ylabel("time [s]")
@@ -66,8 +85,8 @@ def main():
 
     for i, j in zip(crit_2, z):
         selected = [a for a in elements if a.cross == crit[0] and a.mut == crit[1] and a.popC == i]
-        plt.bar([12*x +j for x in range(1,7)], [(1-x.lostCap)*100 for x in selected], label=f"Unused capacity {i}", width=1.5)
-    plt.xticks(ticks=[12*x for x in range(1,7)], labels=[str(x.genC) for x in selected])
+        plt.bar([12*x +j for x in range(1, len(selected)+1)], [(1-x.lostCap)*100 for x in selected], label=f"{i} population", width=1.5)
+    plt.xticks(ticks=[12*x for x in range(1, len(selected)+1)], labels=[str(x.genC) for x in selected])
 
     # ticks = [x.genC for x in selected]
     plt.legend(bbox_to_anchor=(0.5, 1.3), loc='upper center')

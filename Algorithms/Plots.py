@@ -259,8 +259,8 @@ class DataAnt:
 # ************ ******* ** GENETIC PLOT ******* ******* *******
 def main():
     cmtFile = "CMT12"
-    c = 1
-    m = 1
+    c = 2
+    m = 2
 
     with open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.xml", "r+") as f:
         dic = xmltodict.parse(f.read())
@@ -268,13 +268,13 @@ def main():
         file = open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.txt", "w")
         i = 1
         best = Route(0, np.inf, 0, [], "")
+        y = []
         for x in dic['results']['test']:
             z = DataAlgGen(x, data)
             cross = x['@crossOption']
             mutation = x['@mutationOption']
             population = x['@population']
             genCount = x['@generationCount']
-            y = []
             # z.plotBestResult(f"../cmtPlotsGen/result_1_1/{cmtFile}/Routs/plot_{cross}_{mutation}_{population}_{genCount}.jpg")
             if z.bestResult().score < best.score:
                 best = z.bestResult()

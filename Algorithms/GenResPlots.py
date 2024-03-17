@@ -27,9 +27,9 @@ class ParsedData:
 
 
 def main():
-    cmtFile = "CMT1"
-    c = 1
-    m = 2
+    cmtFile = "CMT12"
+    c = 2
+    m = 1
 
     with open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.txt", "r") as f:
         data = f.read().split("\n")

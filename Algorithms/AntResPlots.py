@@ -98,7 +98,7 @@ def main():
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.tight_layout()
     plt.xticks(ticks=[x.nIter for x in selected])
-    plt.ylim((800, 1100))
+    plt.ylim((500, 700))
     plt.pause(0.1)
     plt.savefig(f"../cmtPlotsAnt/{cmtFile}/resultAvgCost_2.jpg")
     plt.close()

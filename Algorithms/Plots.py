@@ -27,8 +27,10 @@ class Route:
 
     def plotRoute(self, path):
         fig, ax = plt.subplots(nrows=1, ncols=1)
-        for data in self.routeArrays:
-            ax.plot(*data.T, marker='.')
+        for i, data in enumerate(self.routeArrays):
+            ax.plot(*data.T, marker='.', label=f"Trasa {i+1}")
+        plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+        plt.tight_layout()
         plt.pause(0.1)
         fig.savefig(path)
         plt.close(fig)
@@ -259,7 +261,7 @@ class DataAnt:
 # ************ ******* ** GENETIC PLOT ******* ******* *******
 def main():
     cmtFile = "CMT12"
-    c = 2
+    c = 1
     m = 2
 
     with open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.xml", "r+") as f:

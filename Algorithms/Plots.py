@@ -225,7 +225,7 @@ class DataAnt:
 
 # ************ ******* ** ANT PLOT ******* ******* *******
 # def main():
-#     cmtFile = "CMT12"
+#     cmtFile = "CMT1"
 #
 #     with open(f"../cmtResultAnt/results{cmtFile}.xml", "r+") as f:
 #         dic = xmltodict.parse(f.read())
@@ -260,9 +260,9 @@ class DataAnt:
 
 # ************ ******* ** GENETIC PLOT ******* ******* *******
 def main():
-    cmtFile = "CMT12"
+    cmtFile = "CMT1"
     c = 1
-    m = 2
+    m = 1
 
     with open(f"../cmtResultGen/result_{c}_{m}/results{cmtFile}.xml", "r+") as f:
         dic = xmltodict.parse(f.read())

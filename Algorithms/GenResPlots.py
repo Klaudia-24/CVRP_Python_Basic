@@ -40,13 +40,13 @@ def main():
     # generationOptions = (10, 20, 40, 80)
     criteria = (0.05, 0.2, 5)
     selected = [a for a in elements if a.cross == criteria[0] and a.mut == criteria[1] and a.popC == criteria[2]]
-    plt.plot([x.genC for x in selected], [x.minScore for x in selected], label="Min")
-    plt.plot([x.genC for x in selected], [x.avgScore for x in selected], label="Avg")
-    plt.plot([x.genC for x in selected], [x.maxScore for x in selected], label="Max")
+    plt.plot([x.genC for x in selected], [x.minScore for x in selected], label="Minimum")
+    plt.plot([x.genC for x in selected], [x.avgScore for x in selected], label="Średnia")
+    plt.plot([x.genC for x in selected], [x.maxScore for x in selected], label="Maksimum")
     plt.xticks(ticks=[x.genC for x in selected])
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-    plt.xlabel("Generation count")
-    plt.ylabel("Distance")
+    plt.xlabel("Liczba generacji")
+    plt.ylabel("Dystans")
     plt.tight_layout()
     plt.pause(0.1)
     plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultMinAvgMax{criteria[2]}.jpg")
@@ -54,13 +54,13 @@ def main():
 
     criteria = (0.05, 0.2, 40)
     selected = [a for a in elements if a.cross == criteria[0] and a.mut == criteria[1] and a.popC == criteria[2]]
-    plt.plot([x.genC for x in selected], [x.minScore for x in selected], label="Min")
-    plt.plot([x.genC for x in selected], [x.avgScore for x in selected], label="Avg")
-    plt.plot([x.genC for x in selected], [x.maxScore for x in selected], label="Max")
+    plt.plot([x.genC for x in selected], [x.minScore for x in selected], label="Minimum")
+    plt.plot([x.genC for x in selected], [x.avgScore for x in selected], label="Średnia")
+    plt.plot([x.genC for x in selected], [x.maxScore for x in selected], label="Maksimum")
     plt.xticks(ticks=[x.genC for x in selected])
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-    plt.xlabel("Generation count")
-    plt.ylabel("Distance")
+    plt.xlabel("Liczba generacji")
+    plt.ylabel("Dystans")
     plt.tight_layout()
     plt.pause(0.1)
     plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultMinAvgMax{criteria[2]}.jpg")
@@ -72,11 +72,11 @@ def main():
     crit_2 = [5, 10, 20, 40] # populationOptions
     for i, j in zip(crit_2, z):
         selected = [a for a in elements if a.cross == crit[0] and a.mut == crit[1] and a.popC == i]
-        plt.plot([x.genC for x in selected], [x.avgTime for x in selected], label=f"{i} population")
+        plt.plot([x.genC for x in selected], [x.avgTime for x in selected], label=f"{i} osobników")
     plt.xticks(ticks=[x.genC for x in selected])
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-    plt.ylabel("time [s]")
-    plt.xlabel("Generation count")
+    plt.ylabel("Czas [s]")
+    plt.xlabel("Liczba generacji")
     plt.tight_layout()
     plt.pause(0.1)
     plt.savefig(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/resultTime.jpg")
@@ -85,13 +85,13 @@ def main():
 
     for i, j in zip(crit_2, z):
         selected = [a for a in elements if a.cross == crit[0] and a.mut == crit[1] and a.popC == i]
-        plt.bar([12*x +j for x in range(1, len(selected)+1)], [(1-x.lostCap)*100 for x in selected], label=f"{i} population", width=1.5)
+        plt.bar([12*x +j for x in range(1, len(selected)+1)], [(1-x.lostCap)*100 for x in selected], label=f"{i} osobników", width=1.5)
     plt.xticks(ticks=[12*x for x in range(1, len(selected)+1)], labels=[str(x.genC) for x in selected])
 
     # ticks = [x.genC for x in selected]
     plt.legend(bbox_to_anchor=(0.5, 1.3), loc='upper center')
     plt.ylabel("%")
-    plt.xlabel("Generation count")
+    plt.xlabel("Liczba generacji")
     # plt.ylim((8, 10))
     plt.tight_layout()
     plt.pause(0.1)

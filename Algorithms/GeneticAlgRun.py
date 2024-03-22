@@ -34,12 +34,12 @@ def main():
 
     crossOptions = (0.05, 0.25)
     mutationOptions = (0.01, 0.2)
-    populationOptions = (5, 10, 20, 40)
-    generationOptions = (10, 20, 40, 80)
+    populationOptions = (5, 10, 20, 40, 80, 160)
+    generationOptions = (10, 20, 40, 80, 160, 320)
     # files = (1, 2, 3, 4, 5, 11, 12)
     files = (1, 12)
     for fileIndex in files:
-        resultFileName = f"../cmtResultGen/result_1_2/resultsCMT{fileIndex}.xml"
+        resultFileName = f"../cmtResultGen/result_1_2/resultsCMT{fileIndex}_test_11.xml"
 
         file = open(resultFileName, "a+")
         file.write('<?xml version="1.0" encoding="UTF-8"?>\n')

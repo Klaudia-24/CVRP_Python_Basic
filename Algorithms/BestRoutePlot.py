@@ -20,9 +20,10 @@ def parseRouteArrays(ar, fullRoute):
 
 def main():
     cmtFile = "CMT12"
-    c = 1
-    m = 1
+    c = 2
+    m = 2
 
+    # with open(f"../cmtResultAnt/bestResult{cmtFile}.txt", "r+") as f:
     with open(f"../cmtResultGen/result_{c}_{m}/bestResult{cmtFile}.txt", "r+") as f:
         dic = f.read().split("[")[2]
         data = Extract(f"../Data/CMT/{cmtFile}.vrp")
@@ -30,6 +31,7 @@ def main():
         for elem in data['nodes'].keys():
             ar = np.append(ar, [[data['nodes'][elem]['x'], data['nodes'][elem]['y']]], axis=0)
     result = Route(0, 0, 0, parseRouteArrays(ar, dic), dic)
+    # result.plotRoute(f"../cmtPlotsAnt/{cmtFile}/bestRoutePlot.jpg")
     result.plotRoute(f"../cmtPlotsGen/result_{c}_{m}/{cmtFile}/bestRoutePlot.jpg")
 
 

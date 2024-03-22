@@ -23,21 +23,21 @@ class ParsedData:
 
 
 def main():
-    cmtFile = "CMT1"
+    cmtFile = "CMT12"
 
     with open(f"../cmtResultAnt/results{cmtFile}.txt", "r") as f:
         data = f.read().split("\n")
         elements = [ParsedData(x) for x in data if x != ""]
     criteria = (10, 20, 40, 60)
-    selCrit = criteria[3]
+    selCrit = criteria[0]
     selected = [a for a in elements if a.nAnt == selCrit]
 
-    plt.plot([x.nIter for x in selected], [x.minScore for x in selected], label="Min")
-    plt.plot([x.nIter for x in selected], [x.avgScore for x in selected], label="Avg")
-    plt.plot([x.nIter for x in selected], [x.maxScore for x in selected], label="Max")
+    plt.plot([x.nIter for x in selected], [x.minScore for x in selected], label="Minimum")
+    plt.plot([x.nIter for x in selected], [x.avgScore for x in selected], label="Średnia")
+    plt.plot([x.nIter for x in selected], [x.maxScore for x in selected], label="Maksimum")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-    plt.xlabel("Iteration count")
-    plt.ylabel("Distance")
+    plt.xlabel("Liczba iteracji")
+    plt.ylabel("Dystans")
     plt.tight_layout()
     plt.xticks(ticks=[x.nIter for x in selected])
     plt.pause(0.1)
@@ -53,10 +53,10 @@ def main():
 
     for i in criteria:
         selected = [a for a in elements if a.nAnt == i]
-        plt.plot([x.nIter for x in selected], [x.avgTime for x in selected], label=f"{i} ants")
+        plt.plot([x.nIter for x in selected], [x.avgTime for x in selected], label=f"{i} mrówek")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-    plt.ylabel("time [s]")
-    plt.xlabel("Iteration count")
+    plt.ylabel("Czas [s]")
+    plt.xlabel("Liczba iteracji")
     plt.tight_layout()
     plt.xticks(ticks=[x.nIter for x in selected])
     plt.pause(0.1)
@@ -66,8 +66,8 @@ def main():
     z = [-4, -2, 0, 2]
     for i, j in zip(criteria, z):
         selected = [a for a in elements if a.nAnt == i]
-        plt.bar([x.nIter + j for x in selected], [(1-x.lostCap)*100 for x in selected], label=f"{i} ants", width=2)
-    plt.xlabel("Iteration count")
+        plt.bar([x.nIter + j for x in selected], [(1-x.lostCap)*100 for x in selected], label=f"{i} mrówek", width=2)
+    plt.xlabel("Liczba iteracji")
     plt.ylabel("%")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.tight_layout()
@@ -80,9 +80,9 @@ def main():
     z = [-4, -2, 0, 2]
     for i, j in zip(criteria, z):
         selected = [a for a in elements if a.nAnt == i]
-        plt.bar([x.nIter + j for x in selected], [x.avgScore for x in selected], label=f"{i} ants", width=2)
-    plt.xlabel("Iteration count")
-    plt.ylabel("??????")
+        plt.bar([x.nIter + j for x in selected], [x.avgScore for x in selected], label=f"{i} mrówek", width=2)
+    plt.xlabel("Liczba iteracji")
+    plt.ylabel("Koszt")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.tight_layout()
     plt.xticks(ticks=[x.nIter for x in selected])
@@ -90,18 +90,19 @@ def main():
     plt.savefig(f"../cmtPlotsAnt/{cmtFile}/resultAvgCost.jpg")
     plt.close()
 
-    z = [-4, -2, 0, 2]
-    for i, j in zip(criteria, z):
-        selected = [a for a in elements if a.nAnt == i]
-        plt.bar([x.nIter + j for x in selected], [x.avgScore for x in selected], label=f"{i} ants", width=2)
-    plt.xlabel("Iteration count")
-    plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-    plt.tight_layout()
-    plt.xticks(ticks=[x.nIter for x in selected])
-    plt.ylim((500, 700))
-    plt.pause(0.1)
-    plt.savefig(f"../cmtPlotsAnt/{cmtFile}/resultAvgCost_2.jpg")
-    plt.close()
+    # z = [-4, -2, 0, 2]
+    # for i, j in zip(criteria, z):
+    #     selected = [a for a in elements if a.nAnt == i]
+    #     plt.bar([x.nIter + j for x in selected], [x.avgScore for x in selected], label=f"{i} mrówek", width=2)
+    # plt.xlabel("Liczba iteracji")
+    # plt.ylabel("Koszt")
+    # plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+    # plt.tight_layout()
+    # plt.xticks(ticks=[x.nIter for x in selected])
+    # plt.ylim((500, 700))
+    # plt.pause(0.1)
+    # plt.savefig(f"../cmtPlotsAnt/{cmtFile}/resultAvgCost_2.jpg")
+    # plt.close()
 
 
 if __name__ == "__main__":

@@ -8,11 +8,11 @@ def main():
     # antsC = (10, 20, 40, 60)
     # iterCount = (25, 50, 75, 100)
     # files = (1, 2, 3, 4, 5, 11, 12)
-    antsC = (60, 5)
-    iterCount = (100, 5)
-    files = (12, 11)
+    antsC = (10, 20, 40, 60, 80, 100)
+    iterCount = (25, 50, 75, 100, 125, 150)
+    files = (1, 12)
     for fileIndex in files:
-        resultFileName = f"../cmtResultAnt/resultsCMT{fileIndex}_1.xml"
+        resultFileName = f"../cmtResultAnt/resultsCMT{fileIndex}_test_11.xml"
         file = open(resultFileName, "a+")
         file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         file.write('<results>\n')

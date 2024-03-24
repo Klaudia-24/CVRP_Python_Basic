@@ -39,7 +39,7 @@ def main():
     # files = (1, 2, 3, 4, 5, 11, 12)
     files = (1, 12)
     for fileIndex in files:
-        resultFileName = f"../cmtResultGen/result_1_2/resultsCMT{fileIndex}_test_11.xml"
+        resultFileName = f"../cmtResultGen/result_1_2/resultsCMT{fileIndex}_test_11_2.xml"
 
         file = open(resultFileName, "a+")
         file.write('<?xml version="1.0" encoding="UTF-8"?>\n')

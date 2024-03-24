@@ -68,8 +68,8 @@ def main():
 
 
     crit = (0.05, 0.01)# cross, mutation
-    z = [-3, -1.5, 0, 1.5]
-    crit_2 = [5, 10, 20, 40] # populationOptions
+    z = [-4.5, -3, -1.5, 0, 1.5, 3]
+    crit_2 = [5, 10, 20, 40, 80, 160] # populationOptions
     for i, j in zip(crit_2, z):
         selected = [a for a in elements if a.cross == crit[0] and a.mut == crit[1] and a.popC == i]
         plt.plot([x.genC for x in selected], [x.avgTime for x in selected], label=f"{i} osobników")

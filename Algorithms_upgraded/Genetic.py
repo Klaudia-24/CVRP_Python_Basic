@@ -31,7 +31,7 @@ class Genetic(Algorithm):
 
     def run(self):
         iter = 0
-
+        self.bestRoutes = []
         # now = datetime.now()
         # current_time = now.strftime("%H:%M:%S")
 
@@ -157,7 +157,7 @@ class Genetic(Algorithm):
 
 def main():
     metaData, nodes, demand = parseData("../Data/RawData/christofides/CMT1.vrp")
-    alg = Genetic(metaData, nodes, demand, 0.3, 0.3, 160, 320, 10)
+    alg = Genetic(metaData, nodes, demand, 0.25, 0.2, 160, 320, 10)
     alg.setMutation(Mutation.BESTSOLUTION)
     print(timeit.timeit(alg.run, number=1))
     s = alg.returnBest()

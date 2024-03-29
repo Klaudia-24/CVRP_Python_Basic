@@ -22,7 +22,7 @@ def main():
         metaData, nodes, demand = parseData(file)
         algGen = Genetic(metaData, nodes, demand, 0, 0, 0, 0, testIterCount=TEST_ITERATIONS)
 
-        algGen.setNCross(2)
+        algGen.setNCross(1)
         algGen.setMutation(Mutation.BESTSOLUTION)
 
         resultFileName = f"../cmtResultGen/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"

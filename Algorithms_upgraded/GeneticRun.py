@@ -10,7 +10,7 @@ DIR_PATH = "..\Data\RawData\**\*.*"
 GENETIC_PARAMETERS = list(
     # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160], [10, 20, 40, 80, 160, 320]]))
     # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160, 320, 640], [10, 20, 40, 80, 160, 320, 640]]))
-    itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160], [10, 20, 40, 80, 160, 320]]))
+    itertools.product(*[[0.25], [0.2], [160], [320]]))
 
 
 TEST_ITERATIONS = 5
@@ -22,10 +22,10 @@ def main():
         metaData, nodes, demand = parseData(file)
         algGen = Genetic(metaData, nodes, demand, 0, 0, 0, 0, testIterCount=TEST_ITERATIONS)
 
-        algGen.setNCross(1)
+        algGen.setNCross(2)
         algGen.setMutation(Mutation.BESTSOLUTION)
 
-        resultFileName = f"../cmtResultGen/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"
+        resultFileName = f"../cmtResultGen/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}_2.xml"
 
         # resultsFile = open(f"Data/ParsedData/{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml", "a+")
         resultsFile = open(resultFileName, "a+")

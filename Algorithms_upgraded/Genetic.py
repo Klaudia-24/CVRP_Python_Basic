@@ -1,7 +1,7 @@
 import timeit
 import numpy as np
 from Algorithms_upgraded.Algorithm import Algorithm, Routes
-from Data.DataParser import parseData
+from Data.DataParser import parseRawData
 from enum import Enum
 from datetime import datetime
 
@@ -156,7 +156,7 @@ class Genetic(Algorithm):
 
 
 def main():
-    metaData, nodes, demand = parseData("../Data/RawData/christofides/CMT1.vrp")
+    metaData, nodes, demand = parseRawData("../Data/RawData/christofides/CMT1.vrp")
     alg = Genetic(metaData, nodes, demand, 0.25, 0.2, 160, 320, 10)
     alg.setMutation(Mutation.BESTSOLUTION)
     print(timeit.timeit(alg.run, number=1))

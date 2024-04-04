@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def parseData(file):
+def parseRawData(file):
     """Parse data from vrp file to metadata, nodes, demand"""
     with open(file, "r") as f:
         raw_string = [x.split("DEMAND_SECTION") for x in f.read().split("NODE_COORD_SECTION")]
@@ -28,4 +28,4 @@ def convert(ob):
 
 
 if __name__ == "__main__":
-    metadata, nodes, demands = parseData("RawData/christofides/CMT1_snip.vrp")
+    metadata, nodes, demands = parseRawData("RawData/christofides/CMT1_snip.vrp")

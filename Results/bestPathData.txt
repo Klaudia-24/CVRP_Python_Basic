@@ -1,0 +1,60 @@
+..\Data\ParsedData\Genetic\resultCMT11_1_1.xml
+crossMode=1, mutMode=1, avgTime=6.234654320008121, score=1613.2354738826011, crossRatio=0.25, mutRatio=0.01, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT11_1_2.xml
+crossMode=1, mutMode=2, avgTime=2.0194544999976642, score=1088.3229379727497, crossRatio=0.05, mutRatio=0.2, popCount=20, genCount=40
+..\Data\ParsedData\Genetic\resultCMT11_2_1.xml
+crossMode=2, mutMode=1, avgTime=4.611570880003273, score=1662.4409225948275, crossRatio=0.25, mutRatio=0.01, popCount=80, genCount=320
+..\Data\ParsedData\Genetic\resultCMT11_2_2.xml
+crossMode=2, mutMode=2, avgTime=8.949548380007036, score=1064.511676562887, crossRatio=0.25, mutRatio=0.2, popCount=80, genCount=40
+..\Data\ParsedData\Genetic\resultCMT12_1_1.xml
+crossMode=1, mutMode=1, avgTime=2.6953125400003044, score=1300.4709567636007, crossRatio=0.05, mutRatio=0.01, popCount=80, genCount=320
+..\Data\ParsedData\Genetic\resultCMT12_1_2.xml
+crossMode=1, mutMode=2, avgTime=149.84841951999988, score=846.6583387547458, crossRatio=0.25, mutRatio=0.2, popCount=160, genCount=160
+..\Data\ParsedData\Genetic\resultCMT12_2_1.xml
+crossMode=2, mutMode=1, avgTime=7.345291019999422, score=1212.2935495591062, crossRatio=0.25, mutRatio=0.01, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT12_2_2.xml
+crossMode=2, mutMode=2, avgTime=79.54739950000075, score=875.2593638356938, crossRatio=0.25, mutRatio=0.2, popCount=80, genCount=160
+..\Data\ParsedData\Genetic\resultCMT12_2_2_test.xml
+crossMode=2, mutMode=2, avgTime=11.850395400001435, score=836.2315615540082, crossRatio=0.05, mutRatio=0.2, popCount=160, genCount=40
+..\Data\ParsedData\Genetic\resultCMT1_1_1.xml
+crossMode=1, mutMode=1, avgTime=6.879356339998776, score=640.7293007280938, crossRatio=0.05, mutRatio=0.01, popCount=80, genCount=320
+..\Data\ParsedData\Genetic\resultCMT1_1_2.xml
+crossMode=1, mutMode=2, avgTime=37.161625180000556, score=526.3715026560985, crossRatio=0.05, mutRatio=0.2, popCount=80, genCount=320
+..\Data\ParsedData\Genetic\resultCMT1_2_1.xml
+crossMode=2, mutMode=1, avgTime=10.765648599999258, score=589.4851436213718, crossRatio=0.25, mutRatio=0.01, popCount=160, genCount=160
+..\Data\ParsedData\Genetic\resultCMT1_2_2.xml
+crossMode=2, mutMode=2, avgTime=28.102255520003382, score=528.5939054208653, crossRatio=0.25, mutRatio=0.2, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT1_2_2_test.xml
+crossMode=2, mutMode=2, avgTime=15.161900119995698, score=528.1982029860109, crossRatio=0.05, mutRatio=0.2, popCount=40, genCount=640
+..\Data\ParsedData\Genetic\resultCMT2_1_1.xml
+crossMode=1, mutMode=1, avgTime=2.598588319995906, score=1060.0475155332613, crossRatio=0.25, mutRatio=0.01, popCount=80, genCount=320
+..\Data\ParsedData\Genetic\resultCMT2_1_2.xml
+crossMode=1, mutMode=2, avgTime=13.346209259994794, score=892.3908212435585, crossRatio=0.25, mutRatio=0.2, popCount=80, genCount=160
+..\Data\ParsedData\Genetic\resultCMT2_2_1.xml
+crossMode=2, mutMode=1, avgTime=22.61862583999755, score=1027.3810905212365, crossRatio=0.05, mutRatio=0.01, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT2_2_2.xml
+crossMode=2, mutMode=2, avgTime=48.8665230399929, score=901.6817700072274, crossRatio=0.25, mutRatio=0.2, popCount=160, genCount=160
+..\Data\ParsedData\Genetic\resultCMT3_1_1.xml
+crossMode=1, mutMode=1, avgTime=1.8214066000073217, score=1140.675503619028, crossRatio=0.25, mutRatio=0.01, popCount=40, genCount=320
+..\Data\ParsedData\Genetic\resultCMT3_1_2.xml
+crossMode=1, mutMode=2, avgTime=206.31364518000046, score=904.3517446860565, crossRatio=0.05, mutRatio=0.2, popCount=80, genCount=320
+..\Data\ParsedData\Genetic\resultCMT3_2_1.xml
+crossMode=2, mutMode=1, avgTime=24.277106600010303, score=1170.006571729936, crossRatio=0.25, mutRatio=0.01, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT3_2_2.xml
+crossMode=2, mutMode=2, avgTime=45.78868054000195, score=900.3835130591877, crossRatio=0.25, mutRatio=0.2, popCount=80, genCount=320
+..\Data\ParsedData\Genetic\resultCMT4_1_1.xml
+crossMode=1, mutMode=1, avgTime=9.362180560000706, score=1768.305626420911, crossRatio=0.25, mutRatio=0.01, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT4_1_2.xml
+crossMode=1, mutMode=2, avgTime=48.595359299983826, score=1178.2449184205047, crossRatio=0.05, mutRatio=0.2, popCount=80, genCount=160
+..\Data\ParsedData\Genetic\resultCMT4_2_1.xml
+crossMode=2, mutMode=1, avgTime=20.254262379999272, score=1692.931138653441, crossRatio=0.05, mutRatio=0.01, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT4_2_2.xml
+crossMode=2, mutMode=2, avgTime=505.43278611999705, score=1182.3929110608103, crossRatio=0.25, mutRatio=0.2, popCount=160, genCount=160
+..\Data\ParsedData\Genetic\resultCMT5_1_1.xml
+crossMode=1, mutMode=1, avgTime=39.22676632000366, score=2436.22586975555, crossRatio=0.05, mutRatio=0.01, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT5_1_2.xml
+crossMode=1, mutMode=2, avgTime=44.37250012001023, score=1496.6825349918759, crossRatio=0.05, mutRatio=0.2, popCount=20, genCount=320
+..\Data\ParsedData\Genetic\resultCMT5_2_1.xml
+crossMode=2, mutMode=1, avgTime=8.108414280007128, score=2458.333123484306, crossRatio=0.05, mutRatio=0.01, popCount=160, genCount=320
+..\Data\ParsedData\Genetic\resultCMT5_2_2.xml
+crossMode=2, mutMode=2, avgTime=41.08028102000244, score=1506.7671562813725, crossRatio=0.25, mutRatio=0.2, popCount=160, genCount=40

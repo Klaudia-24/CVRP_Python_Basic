@@ -15,7 +15,7 @@ SOL_PATH = "..\Data\ParsedData\**\*.*"
 GENETIC_PARAMETERS = list(
     # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160], [10, 20, 40, 80, 160, 320]]))
     # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160, 320, 640], [10, 20, 40, 80, 160, 320, 640]]))
-    itertools.product(*[[0.25], [0.2], [80], [160]]))
+    itertools.product(*[[0.05], [0.2], [80], [320]]))
 
 TEST_ITERATIONS = 20
 
@@ -29,7 +29,7 @@ def main():
         algGen.setNCross(2)
         algGen.setMutation(Mutation.BESTSOLUTION)
 
-        resultFileName = f"../cmtResultGen/iter_20/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}_20.xml"
+        resultFileName = f"../cmtResultGen/iter_20/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"
 
         # resultsFile = open(f"Data/ParsedData/{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml", "a+")
         resultsFile = open(resultFileName, "a+")
@@ -85,12 +85,14 @@ def analyseData(mode: ALGTYPE):
             i += 1
         if i != 0:
             resultName += f"_({i})"
-        result.bestRouteGraph(f"..\\Results\\{folder}\\{resultName}_graph.jpg")
-        result.timeGraphFor(path=f"..\\Results\\{folder}\\{resultName}_time.jpg")
-        result.scoreGraph(path=f"..\\Results\\{folder}\\{resultName}_score.jpg")
+        # result.bestRouteGraph(f"..\\Results\\{folder}\\{resultName}_graph.jpg")
+        # result.timeGraphFor(path=f"..\\Results\\{folder}\\{resultName}_time.jpg")
+        result.timeGraph(path=f"..\\Results\\{folder}\\{resultName}_timeAllGen_2.jpg")
+        # result.scoreGraph(path=f"..\\Results\\{folder}\\{resultName}_score.jpg")
+        # result.lostCapacityGraph(path=f"..\\Results\\{folder}\\{resultName}_capacityLost.jpg")
 
 
 if __name__ == "__main__":
-    main()
+    # main()
 
-    # analyseData(ALGTYPE.GENETIC)
+    analyseData(ALGTYPE.GENETIC)

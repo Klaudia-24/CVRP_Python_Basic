@@ -12,13 +12,15 @@ dir_path_local = "..\Data\RawData\**\*.*"
 dir_path_folder = "..\\Data\\RawData\\**\\"
 SOL_PATH = "..\Data\ParsedData\**\*.*"
 
+
 GENETIC_PARAMETERS = list(
-    # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160], [10, 20, 40, 80, 160, 320]]))
+    itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160], [10, 20, 40, 80, 160, 320]]))
     # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160, 320, 640], [10, 20, 40, 80, 160, 320, 640]]))
-    itertools.product(*[[0.05], [0.2], [80], [320]]))
+    # itertools.product(*[[0.05], [0.2], [80], [320]]))
 
-TEST_ITERATIONS = 20
+TEST_ITERATIONS = 5
 
+# TEST_ITERATIONS = 20
 
 def main():
     for file in glob.glob(dir_path_local, recursive=True):
@@ -26,10 +28,21 @@ def main():
         metaData, nodes, demand = parseRawData(file)
         algGen = Genetic(metaData, nodes, demand, 0, 0, 0, 0, testIterCount=TEST_ITERATIONS)
 
-        algGen.setNCross(2)
-        algGen.setMutation(Mutation.BESTSOLUTION)
+        algGen.setNCross(1)
+        algGen.setMutation(Mutation.RANDOM)
 
-        resultFileName = f"../cmtResultGen/iter_20/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"
+        # algGen.setNCross(2)
+        # algGen.setMutation(Mutation.RANDOM)
+
+        # algGen.setNCross(1)
+        # algGen.setMutation(Mutation.BESTSOLUTION)
+
+        # algGen.setNCross(2)
+        # algGen.setMutation(Mutation.BESTSOLUTION)
+
+        # resultFileName = f"../cmtResultGen/iter_20/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"
+
+        resultFileName = f"../Data/ParsedData/Genetic/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"
 
         # resultsFile = open(f"Data/ParsedData/{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml", "a+")
         resultsFile = open(resultFileName, "a+")
@@ -85,11 +98,11 @@ def analyseData(mode: ALGTYPE):
             i += 1
         if i != 0:
             resultName += f"_({i})"
-        # result.bestRouteGraph(f"..\\Results\\{folder}\\{resultName}_graph.jpg")
+        result.bestRouteGraph(f"..\\Results\\{folder}\\{resultName}_graph.jpg")
         # result.timeGraphFor(path=f"..\\Results\\{folder}\\{resultName}_time.jpg")
-        result.timeGraph(path=f"..\\Results\\{folder}\\{resultName}_timeAllGen_2.jpg")
-        # result.scoreGraph(path=f"..\\Results\\{folder}\\{resultName}_score.jpg")
-        # result.lostCapacityGraph(path=f"..\\Results\\{folder}\\{resultName}_capacityLost.jpg")
+        result.timeGraph(path=f"..\\Results\\{folder}\\{resultName}_timeAllGen.jpg")
+        result.scoreGraph(path=f"..\\Results\\{folder}\\{resultName}_score.jpg")
+        result.lostCapacityGraph(path=f"..\\Results\\{folder}\\{resultName}_capacityLost.jpg")
 
 
 if __name__ == "__main__":

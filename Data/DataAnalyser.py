@@ -312,5 +312,5 @@ if __name__ == "__main__":
     # result.bestRouteGraph(".\\Results\\Genetic\\fig1.jpg")
     # result.scoreGraph(par=(0.05, 0.2, 160))
     # result.lostCapacityGraph()
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT12_routsBest.jpg")
+    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT12_routsBest.jpg") # uncomment line in parseData fun for one test
     subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT1_routsAll.jpg")

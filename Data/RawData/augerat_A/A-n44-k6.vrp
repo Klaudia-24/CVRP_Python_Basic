@@ -1,5 +1,5 @@
 NAME : A-n44-k6
-COMMENT : (Augerat et al, No of trucks: 6, Optimal value: 937)
+COMMENT : 937
 TYPE : CVRP
 DIMENSION : 44
 EDGE_WEIGHT_TYPE : EUC_2D 

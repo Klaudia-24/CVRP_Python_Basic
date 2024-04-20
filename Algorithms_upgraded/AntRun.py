@@ -60,7 +60,7 @@ def main():
                 continue
             index += 1
             ant.setParameters(*args)
-            print(f"{index}/{len(ANT_PARAMETERS) - 16}     {resultName}.vrp")
+            print(f"{index}/{len(ANT_PARAMETERS) - 16}    {args[2]}  {args[3]}    {resultName}.vrp")
 
             now = datetime.now()
             test_time = now.strftime("%H:%M:%S")

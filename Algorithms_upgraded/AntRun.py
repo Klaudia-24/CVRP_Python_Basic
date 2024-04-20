@@ -1,0 +1,89 @@
+import itertools
+from Data.DataParser import parseRawData
+import glob
+import timeit
+from Data.DataAnalyser import parseData, ALGTYPE
+from Algorithms_upgraded.Ant import Ant
+from datetime import datetime
+
+dir_path_local = "..\Data\RawData\**\*.*"
+dir_path_folder = "..\\Data\\RawData\\**\\"
+SOL_PATH = "..\Data\ParsedData\**\*.*"
+
+ANT_PARAMETERS = list(itertools.product(*[[10, 50, 100, 150], [20, 50, 100, 150], [1, 3], [1, 3], [0.5], [1]]))
+TEST_ITERATIONS = 5
+
+
+def analyseData(mode: ALGTYPE):
+    resultsFile = open(f"Results/bestPathData.txt", "w")
+    index = 0
+    count = len(glob.glob(SOL_PATH, recursive=True))
+    for file in glob.glob(SOL_PATH, recursive=True):
+        index += 1
+        print(f"{index}/{count} Parsing: " + file)
+        result = parseData(file, DIR_PATH=dir_path_folder, mode=mode)
+        resultName = file.split("\\")[-1].split(".")[0]
+        resultsFile.write(file + "\n")
+        resultsFile.write(result.bestRoute().__repr__() + "\n")
+        folder = "Genetic" if ALGTYPE.GENETIC else "Ant"
+        i = 0
+        for _ in glob.glob(f".\\Results\\{folder}\\{resultName}_graph.jpg"):
+            i += 1
+        if i != 0:
+            resultName += f"_({i})"
+        result.bestRouteGraph(f".\\Results\\{folder}\\{resultName}_graph.jpg")
+        result.timeGraphFor(path=f".\\Results\\{folder}\\{resultName}_time.jpg")
+        result.scoreGraph(path=f".\\Results\\{folder}\\{resultName}_score.jpg")
+        result.lostCapacityGraph(path=f".\\Results\\{folder}\\{resultName}_capacitylost.jpg")
+
+
+def main():
+    for file in glob.glob(dir_path_local, recursive=True):
+        resultName = file.split("\\")[-1].split(".")[0]
+        metaData, nodes, demand = parseRawData(file)
+        ant = Ant(metaData, nodes, demand, 0, 0, 0, 0, 0, 0, testIterCount=TEST_ITERATIONS)
+
+        resultFileName = f"../Data/ParsedData/Ant/{resultName}_{ant.alpha}_{ant.beta}.xml"
+
+        resultsFile = open(resultFileName, "a+")
+        resultsFile.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+        resultsFile.write('<results>\n')
+        resultsFile.close()
+
+        print("")
+        print(f"{resultName}.xml")
+        start_time = datetime.now().strftime("%H:%M:%S")
+
+        index = 0
+        for args in ANT_PARAMETERS:
+            if args[2] == 3 and args[3] == 3:
+                continue
+            index += 1
+            ant.setParameters(*args)
+            print(f"{index}/{len(ANT_PARAMETERS) - 16}     {resultName}.vrp")
+
+            now = datetime.now()
+            test_time = now.strftime("%H:%M:%S")
+            print(f"Start time: {start_time}  |  {test_time}")
+
+            time = timeit.timeit(ant.run, number=1) / TEST_ITERATIONS
+            res = ant.returnBest()
+            resultsFile = open(resultFileName, "a+")
+            resultsFile.write(
+                f'<test alpha="{ant.alpha}" beta="{ant.beta}" antCount="{ant.nAnt}" '
+                f'iterationCount="{ant.nIter}" avgTime="{time}">\n')
+            for i in range(TEST_ITERATIONS):
+                resultsFile.write(f'<route id="{i}" score="{res[i].score}">\n')
+                resultsFile.write(str(res[i].route) + "\n")
+                resultsFile.write('</route>\n')
+            resultsFile.write('</test>\n')
+            resultsFile.close()
+        resultsFile = open(resultFileName, "w")
+        resultsFile.write('</results>\n')
+        resultsFile.close()
+
+
+if __name__ == "__main__":
+    main()
+
+    # analyseData(ALGTYPE.ANT)

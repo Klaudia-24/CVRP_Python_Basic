@@ -18,9 +18,9 @@ GENETIC_PARAMETERS = list(
     # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160, 320, 640], [10, 20, 40, 80, 160, 320, 640]]))
     # itertools.product(*[[0.05], [0.2], [80], [320]]))
 
-TEST_ITERATIONS = 5
+# TEST_ITERATIONS = 5
 
-# TEST_ITERATIONS = 20
+TEST_ITERATIONS = 20
 
 def main():
     for file in glob.glob(dir_path_local, recursive=True):
@@ -106,6 +106,6 @@ def analyseData(mode: ALGTYPE):
 
 
 if __name__ == "__main__":
-    # main()
+    main()
 
-    analyseData(ALGTYPE.GENETIC)
+    # analyseData(ALGTYPE.GENETIC)

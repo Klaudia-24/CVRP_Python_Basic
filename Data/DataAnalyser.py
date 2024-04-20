@@ -202,7 +202,7 @@ class Data:
             # plt.xticks(ticks=generations)
             plt.xlabel("Liczba generacji")
             plt.ylabel("Dystans")
-            plt.grid(linestyle='--')
+            # plt.grid(linestyle='--')
             plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
             plt.tight_layout()
             plt.pause(0.1)
@@ -297,6 +297,21 @@ def parseData(filePath, DIR_PATH=DIR_PATH_LOCAL, mode: ALGTYPE = ALGTYPE.GENETIC
 
 
 if __name__ == "__main__":
+
+    # christofides resultCMT1 ; resultCMT12
+
+    # results = [parseData("..\\cmtResultGen\\iter_20\\resultCMT1_1_2.xml", mode=ALGTYPE.GENETIC)]
+    # results.append(parseData("..\\cmtResultGen\\iter_20\\resultCMT1_1_1.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData("..\\cmtResultGen\\iter_20\\resultCMT1_2_2.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData("..\\cmtResultGen\\iter_20\\resultCMT1_2_1.xml", mode=ALGTYPE.GENETIC))
+
+    # results = [parseData(".\\ParsedData\\Genetic\\resultCMT1_1_2.xml", mode=ALGTYPE.GENETIC)]
+    # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT1_1_1.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT1_2_2.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT1_2_1.xml", mode=ALGTYPE.GENETIC))
+
+    # augerat_A
+
     # results = [parseData("..\\cmtResultGen\\iter_20\\resultCMT1_1_2.xml", mode=ALGTYPE.GENETIC)]
     # results.append(parseData("..\\cmtResultGen\\iter_20\\resultCMT1_1_1.xml", mode=ALGTYPE.GENETIC))
     # results.append(parseData("..\\cmtResultGen\\iter_20\\resultCMT1_2_2.xml", mode=ALGTYPE.GENETIC))

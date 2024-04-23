@@ -10,7 +10,7 @@ dir_path_local = "..\Data\RawData\**\*.*"
 dir_path_folder = "..\\Data\\RawData\\**\\"
 SOL_PATH = "..\Data\ParsedData\**\*.*"
 
-ANT_PARAMETERS = list(itertools.product(*[[10, 50, 100, 150], [20, 50, 100, 150], [1, 3], [1, 3], [0.5], [1]]))
+ANT_PARAMETERS = list(itertools.product(*[[10, 50, 100, 150], [20, 50, 100, 150, 250], [1], [1], [0.5], [1]]))
 TEST_ITERATIONS = 5
 
 
@@ -43,7 +43,9 @@ def main():
         metaData, nodes, demand = parseRawData(file)
         ant = Ant(metaData, nodes, demand, 0, 0, 0, 0, 0, 0, testIterCount=TEST_ITERATIONS)
 
-        resultFileName = f"../Data/ParsedData/Ant/{resultName}_{ant.alpha}_{ant.beta}.xml"
+
+        # resultFileName = f"../Data/ParsedData/Ant/{resultName}_{ant.alpha}_{ant.beta}.xml"
+        resultFileName = f"../Data/ParsedData/Ant/{resultName}_1_1.xml"
 
         resultsFile = open(resultFileName, "a+")
         resultsFile.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -60,13 +62,14 @@ def main():
                 continue
             index += 1
             ant.setParameters(*args)
-            print(f"{index}/{len(ANT_PARAMETERS) - 16}    {args[2]}  {args[3]}    {resultName}.vrp")
+            # print(f"{index}/{len(ANT_PARAMETERS) - 16}    {args[2]}  {args[3]}    {resultName}.vrp")
+            print(f"{index}/{len(ANT_PARAMETERS)}    {ant.alpha} {ant.beta}   {ant.nAnt} {ant.nIter}    {resultName}.vrp")
 
             now = datetime.now()
             test_time = now.strftime("%H:%M:%S")
             print(f"Start time: {start_time}  |  {test_time}")
-
             time = timeit.timeit(ant.run, number=1) / TEST_ITERATIONS
+
             res = ant.returnBest()
             resultsFile = open(resultFileName, "a+")
             resultsFile.write(
@@ -78,7 +81,7 @@ def main():
                 resultsFile.write('</route>\n')
             resultsFile.write('</test>\n')
             resultsFile.close()
-        resultsFile = open(resultFileName, "w")
+        resultsFile = open(resultFileName, "a+")
         resultsFile.write('</results>\n')
         resultsFile.close()
 

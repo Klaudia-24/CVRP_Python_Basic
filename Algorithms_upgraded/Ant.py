@@ -30,8 +30,9 @@ class Ant(Algorithm):
             counter += 1
             print(f"Running test {counter}")
             pherMatrix = np.ones((self.metaData['DIMENSION'], self.metaData['DIMENSION']))
-            bestRoute = Routes([],np.inf)
-            for it in range(self.nIter):
+            it=0
+            while it < self.nIter:
+                it+=1
                 routeList=[]
                 for ant in range(self.nAnt):
                     visited = [False] * self.metaData['DIMENSION']
@@ -59,14 +60,12 @@ class Ant(Algorithm):
                     score += self.distMatrix[0][route[-1]]
                     route.append(0)
                     routeList.append(Routes(route,score))
-                    if score < bestRoute.score:
-                        bestRoute.score = score
-                        bestRoute.route = route
                 pherMatrix *= self.evapRate
                 for route in routeList:
                     for i in range(self.metaData['DIMENSION']-1):
                         pherMatrix[route.route[i], route.route[i + 1]] += self.Q / route.score
-            self.bestRoutes.append(bestRoute)
+            routeList.sort(key = lambda x: x.score)
+            self.bestRoutes.append(routeList[0])
 
     def returnBest(self):
         return self.bestRoutes
@@ -76,13 +75,13 @@ class Ant(Algorithm):
         self.nIter = args[1]
         self.alpha = args[2]
         self.beta = args[3]
-        self.evapRate =args[4]
+        self.evapRate = args[4]
         self.Q = args[5]
 
 
 def main():
-    metaData, nodes, demand = parseRawData("../Data/RawData/christofides/CMT1.vrp")
-    alg = Ant(metaData, nodes, demand, 40, 100, 0.7, 1, 0.6, 1)
+    metaData, nodes, demand = parseRawData("../Data/RawData/christofides/CMT4.vrp")
+    alg = Ant(metaData, nodes, demand, 20, 100, 1, 1, 0.6, 1)
     print(timeit.timeit(alg.run, number=1))
     s=alg.returnBest()
     print([a.score for a in s])

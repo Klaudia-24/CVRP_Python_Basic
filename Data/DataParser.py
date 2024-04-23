@@ -10,9 +10,9 @@ def parseRawData(file):
 
     demand = [int(x.strip(" ").split(" ")[1]) for x in raw_string[1][1].split("DEPOT_SECTION")[0].split("\n") if x!="" and x!=" "]
     nodes = [x.strip(" ").split(" ") for x in raw_string[1][0].split("\n") if x!="" and x!=" "]
-    collection = [list(z) for z in list(dict.fromkeys([(float(x[1]),float(x[2]),y) for x,y in zip(nodes,demand)]))]
-    demand = [x[2] for x in collection]
-    nodes = np.array([x[:2] for x in collection])
+    collection = {(float(x[1]), float(x[2])): y for x,y in zip(nodes,demand)}
+    demand = [collection[x] for x in collection.keys()]
+    nodes = np.array([list(x) for x in collection.keys()])
 
     metadata["DIMENSION"]=len(demand)
 
@@ -20,12 +20,15 @@ def parseRawData(file):
 
 
 def convert(ob):
-    """Try to convert ob to float. Return ob if fail."""
+    """Try to convert ob to float. Return ob if failed."""
     try:
         return float(ob)
     except Exception:
         return ob
 
 
-if __name__ == "__main__":
-    metadata, nodes, demands = parseRawData("RawData/christofides/CMT1_snip.vrp")
+if __name__=="__main__":
+    metadata, nodes, demands = parseRawData("./RawData/christofides/CMT4.vrp")
+    print(metadata)
+    print(nodes)
+    print(demands)

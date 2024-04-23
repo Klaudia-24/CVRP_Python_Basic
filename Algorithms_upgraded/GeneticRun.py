@@ -14,9 +14,9 @@ SOL_PATH = "..\Data\ParsedData\**\*.*"
 
 
 GENETIC_PARAMETERS = list(
-    itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160], [10, 20, 40, 80, 160, 320]]))
+    # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160], [10, 20, 40, 80, 160, 320]]))
     # itertools.product(*[[0.05, 0.25], [0.01, 0.2], [5, 10, 20, 40, 80, 160, 320, 640], [10, 20, 40, 80, 160, 320, 640]]))
-    # itertools.product(*[[0.05], [0.2], [80], [320]]))
+    itertools.product(*[[0.25], [0.2], [80], [320]]))
 
 # TEST_ITERATIONS = 5
 
@@ -42,7 +42,9 @@ def main():
 
         # resultFileName = f"../cmtResultGen/iter_20/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"
 
-        resultFileName = f"../Data/ParsedData/Genetic/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"
+        # resultFileName = f"../Data/ParsedData/Genetic/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml"
+
+        resultFileName = f"../Data/ParsedData/Genetic/iter_20/result{resultName}_{algGen.nCross}_{algGen.mutationMode.value}_20.xml"
 
         # resultsFile = open(f"Data/ParsedData/{resultName}_{algGen.nCross}_{algGen.mutationMode.value}.xml", "a+")
         resultsFile = open(resultFileName, "a+")

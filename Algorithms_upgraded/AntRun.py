@@ -17,29 +17,6 @@ ANT_PARAMETERS = list(itertools.product(*[[150], [20, 50, 100, 150, 250], [1], [
 TEST_ITERATIONS = 5
 
 
-def analyseData(mode: ALGTYPE):
-    resultsFile = open(f"Results/bestPathData.txt", "w")
-    index = 0
-    count = len(glob.glob(SOL_PATH, recursive=True))
-    for file in glob.glob(SOL_PATH, recursive=True):
-        index += 1
-        print(f"{index}/{count} Parsing: " + file)
-        result = parseData(file, DIR_PATH=dir_path_folder, mode=mode)
-        resultName = file.split("\\")[-1].split(".")[0]
-        resultsFile.write(file + "\n")
-        resultsFile.write(result.bestRoute().__repr__() + "\n")
-        folder = "Genetic" if ALGTYPE.GENETIC else "Ant"
-        i = 0
-        for _ in glob.glob(f".\\Results\\{folder}\\{resultName}_graph.jpg"):
-            i += 1
-        if i != 0:
-            resultName += f"_({i})"
-        # result.bestRouteGraph(f".\\Results\\{folder}\\{resultName}_graph.jpg")
-        # result.timeGraphFor(path=f".\\Results\\{folder}\\{resultName}_time.jpg")
-        # result.scoreGraph(path=f".\\Results\\{folder}\\{resultName}_score.jpg")
-        # result.lostCapacityGraph(path=f".\\Results\\{folder}\\{resultName}_capacitylost.jpg")
-
-
 def main():
     for file in glob.glob(dir_path_local, recursive=True):
         resultName = file.split("\\")[-1].split(".")[0]
@@ -87,6 +64,30 @@ def main():
         resultsFile = open(resultFileName, "a+")
         resultsFile.write('</results>\n')
         resultsFile.close()
+
+
+def analyseData(mode: ALGTYPE):
+    resultsFile = open(f"../Results/bestPathData.txt", "w")
+    index = 0
+    count = len(glob.glob(SOL_PATH, recursive=True))
+    for file in glob.glob(SOL_PATH, recursive=True):
+        index += 1
+        print(f"{index}/{count} Parsing: " + file)
+        result = parseData(file, DIR_PATH=dir_path_folder, mode=mode)
+        resultName = file.split("\\")[-1].split(".")[0]
+        resultsFile.write(file + "\n")
+        resultsFile.write(result.bestRoute().__repr__() + "\n")
+        folder = "Genetic" if ALGTYPE.GENETIC else "Ant"
+        i = 0
+        for _ in glob.glob(f".\\Results\\{folder}\\{resultName}_graph.jpg"):
+            i += 1
+        if i != 0:
+            resultName += f"_({i})"
+        result.bestRouteGraph(f".\\Results\\{folder}\\{resultName}_graph.jpg")
+        result.timeGraphFor(path=f".\\Results\\{folder}\\{resultName}_time.jpg")
+        result.scoreGraph(path=f".\\Results\\{folder}\\{resultName}_score.jpg")
+        result.lostCapacityGraph(path=f".\\Results\\{folder}\\{resultName}_capacitylost.jpg")
+
 
 
 if __name__ == "__main__":

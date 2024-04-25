@@ -151,25 +151,27 @@ class Data:
             plt.xlabel("Liczba generacji")
             plt.ylabel("Czas [s]")
 
-            if isinstance(self.bestRoute(), AntSolutions):
-                antCount = list(set([x.antCount for x in self.parsedData]))
-                antCount.sort()
-                for count in antCount:
-                    points = list(set([(x.iterCount, x.avgTime) for x in self.parsedData if
-                                       x.alpha == par[0] and x.beta == par[1] and x.antCount == count]))
-                    points.sort(key=lambda a: a[0])
-                    points = np.array(points)
-                    ax.plot(points[:, 0], points[:, 1], marker=".", label=f"a={par[0]} b={par[1]} m={count}")
-                plt.xlabel("Liczba iteracji")
-                plt.ylabel("Czas [s]")
-            plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-            plt.tight_layout()
-            plt.pause(0.1)
-            if path is None:
-                plt.show()
-            else:
-                fig.savefig(path)
-                plt.close(fig)
+        if isinstance(self.bestRoute(), AntSolutions):
+            antCount = list(set([x.antCount for x in self.parsedData]))
+            antCount.sort()
+            for count in antCount:
+                points = list(set([(x.iterCount, x.avgTime) for x in self.parsedData if
+                                   x.alpha == par[0] and x.beta == par[1] and x.antCount == count]))
+                points.sort(key=lambda a: a[0])
+                points = np.array(points)
+                # ax.plot(points[:, 0], points[:, 1], marker=".", label=f"a={par[0]} b={par[1]} m={count}")
+                ax.plot(points[:, 0], points[:, 1], marker=".", label=f"m={count}")
+            plt.xlabel("Liczba iteracji")
+            plt.ylabel("Czas [s]")
+        plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+        plt.tight_layout()
+        plt.pause(0.1)
+
+        if path is None:
+            plt.show()
+        else:
+            fig.savefig(path)
+            plt.close(fig)
 
     # def timeGraphFor(self, par=None, path=None):
     #     if par is None:

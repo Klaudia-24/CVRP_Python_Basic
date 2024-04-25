@@ -10,7 +10,10 @@ dir_path_local = "..\Data\RawData\**\*.*"
 dir_path_folder = "..\\Data\\RawData\\**\\"
 SOL_PATH = "..\Data\ParsedData\**\*.*"
 
-ANT_PARAMETERS = list(itertools.product(*[[10, 50, 100, 150], [20, 50, 100, 150, 250], [1], [1], [0.5], [1]]))
+#                                            antCount            iterCount
+# ANT_PARAMETERS = list(itertools.product(*[[10, 50, 100, 150], [20, 50, 100, 150, 250], [1], [1], [0.5], [1]]))
+
+ANT_PARAMETERS = list(itertools.product(*[[150], [20, 50, 100, 150, 250], [1], [3], [0.5], [1]]))
 TEST_ITERATIONS = 5
 
 
@@ -31,10 +34,10 @@ def analyseData(mode: ALGTYPE):
             i += 1
         if i != 0:
             resultName += f"_({i})"
-        result.bestRouteGraph(f".\\Results\\{folder}\\{resultName}_graph.jpg")
-        result.timeGraphFor(path=f".\\Results\\{folder}\\{resultName}_time.jpg")
-        result.scoreGraph(path=f".\\Results\\{folder}\\{resultName}_score.jpg")
-        result.lostCapacityGraph(path=f".\\Results\\{folder}\\{resultName}_capacitylost.jpg")
+        # result.bestRouteGraph(f".\\Results\\{folder}\\{resultName}_graph.jpg")
+        # result.timeGraphFor(path=f".\\Results\\{folder}\\{resultName}_time.jpg")
+        # result.scoreGraph(path=f".\\Results\\{folder}\\{resultName}_score.jpg")
+        # result.lostCapacityGraph(path=f".\\Results\\{folder}\\{resultName}_capacitylost.jpg")
 
 
 def main():
@@ -43,9 +46,8 @@ def main():
         metaData, nodes, demand = parseRawData(file)
         ant = Ant(metaData, nodes, demand, 0, 0, 0, 0, 0, 0, testIterCount=TEST_ITERATIONS)
 
-
         # resultFileName = f"../Data/ParsedData/Ant/{resultName}_{ant.alpha}_{ant.beta}.xml"
-        resultFileName = f"../Data/ParsedData/Ant/{resultName}_1_1.xml"
+        resultFileName = f"../Data/ParsedData/Ant/{resultName}_1_3_part3.xml"
 
         resultsFile = open(resultFileName, "a+")
         resultsFile.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -63,7 +65,8 @@ def main():
             index += 1
             ant.setParameters(*args)
             # print(f"{index}/{len(ANT_PARAMETERS) - 16}    {args[2]}  {args[3]}    {resultName}.vrp")
-            print(f"{index}/{len(ANT_PARAMETERS)}    {ant.alpha} {ant.beta}   {ant.nAnt} {ant.nIter}    {resultName}.vrp")
+            print(
+                f"{index}/{len(ANT_PARAMETERS)}    {ant.alpha} {ant.beta}   {ant.nAnt} {ant.nIter}    {resultName}.vrp")
 
             now = datetime.now()
             test_time = now.strftime("%H:%M:%S")

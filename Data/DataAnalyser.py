@@ -52,11 +52,18 @@ class GeneticSolutions(Solutions):
 
 
 @dataclass
-class AntSolutions:
+class AntSolutions(Solutions):
     alpha: float
     beta: float
     antCount: int
     iterCount: int
+
+    def param(self):
+        return self.alpha, self.beta, self.antCount
+
+    def __repr__(self):
+        return ("alpha={}, beta={}, avgTime={}, score={}, antCount={}, iterCount={}"
+                .format(self.alpha, self.beta, self.avgTime, self.score, self.antCount, self.iterCount))
 
 
 class Data:
@@ -135,13 +142,26 @@ class Data:
             popCounts = list(set([x.popCount for x in self.parsedData]))
             popCounts.sort()
             for pop in popCounts:
-                points = list(set([(x.genCount, x.avgTime) for x in self.parsedData if x.crossRatio==par[0] and x.mutRatio == par[1] and x.popCount == pop]))
-                points.sort(key= lambda a: a[0])
-                points=np.array(points)
+                points = list(set([(x.genCount, x.avgTime) for x in self.parsedData if
+                                   x.crossRatio == par[0] and x.mutRatio == par[1] and x.popCount == pop]))
+                points.sort(key=lambda a: a[0])
+                points = np.array(points)
                 # ax.plot(points[:,0],points[:,1], marker=".", label=f"c={par[0]*100}% m={par[1]*100}% p={pop}")
                 ax.plot(points[:, 0], points[:, 1], marker=".", label=f"p={pop}")
             plt.xlabel("Liczba generacji")
             plt.ylabel("Czas [s]")
+
+            if isinstance(self.bestRoute(), AntSolutions):
+                antCount = list(set([x.antCount for x in self.parsedData]))
+                antCount.sort()
+                for count in antCount:
+                    points = list(set([(x.iterCount, x.avgTime) for x in self.parsedData if
+                                       x.alpha == par[0] and x.beta == par[1] and x.antCount == count]))
+                    points.sort(key=lambda a: a[0])
+                    points = np.array(points)
+                    ax.plot(points[:, 0], points[:, 1], marker=".", label=f"a={par[0]} b={par[1]} m={count}")
+                plt.xlabel("Liczba iteracji")
+                plt.ylabel("Czas [s]")
             plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
             plt.tight_layout()
             plt.pause(0.1)
@@ -151,30 +171,97 @@ class Data:
                 fig.savefig(path)
                 plt.close(fig)
 
+    # def timeGraphFor(self, par=None, path=None):
+    #     if par is None:
+    #         par = self.bestRoute().param()
+    #     fig, ax = plt.subplots(nrows=1, ncols=1)
+    #     if isinstance(self.bestRoute(), GeneticSolutions):
+    #         points = list(set([(x.genCount, x.avgTime) for x in self.parsedData if
+    #                            x.crossRatio == par[0] and x.mutRatio == par[1] and x.popCount == par[2]]))
+    #         points.sort(key=lambda a: a[0])
+    #         points = np.array(points)
+    #         ax.plot(points[:, 0], points[:, 1], marker=".", label=f"c={par[0]*100}% m={par[1]*100}% p={par[2]}")
+    #         # ax.plot(points[:, 0], points[:, 1], marker=".", label=f"p={par[2]}")
+    #         plt.xticks(ticks=points[:, 0])
+    #         # for i in points:
+    #         #     ax.text(i[0], i[1] + 0.15, f"{np.round(i[1], 2)}", ha="center")
+    #         plt.xlabel("Liczba generacji")
+    #         plt.ylabel("Czas [s]")
+    #         plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+    #         plt.tight_layout()
+    #         plt.pause(0.1)
+    #         if path is None:
+    #             plt.show()
+    #         else:
+    #             fig.savefig(path)
+    #             plt.close(fig)
+
     def timeGraphFor(self, par=None, path=None):
         if par is None:
             par = self.bestRoute().param()
         fig, ax = plt.subplots(nrows=1, ncols=1)
+        points = []
         if isinstance(self.bestRoute(), GeneticSolutions):
             points = list(set([(x.genCount, x.avgTime) for x in self.parsedData if
                                x.crossRatio == par[0] and x.mutRatio == par[1] and x.popCount == par[2]]))
-            points.sort(key=lambda a: a[0])
-            points = np.array(points)
-            ax.plot(points[:, 0], points[:, 1], marker=".", label=f"c={par[0]*100}% m={par[1]*100}% p={par[2]}")
-            # ax.plot(points[:, 0], points[:, 1], marker=".", label=f"p={par[2]}")
-            plt.xticks(ticks=points[:, 0])
-            # for i in points:
-            #     ax.text(i[0], i[1] + 0.15, f"{np.round(i[1], 2)}", ha="center")
             plt.xlabel("Liczba generacji")
-            plt.ylabel("Czas [s]")
-            plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-            plt.tight_layout()
-            plt.pause(0.1)
-            if path is None:
-                plt.show()
-            else:
-                fig.savefig(path)
-                plt.close(fig)
+
+        if isinstance(self.bestRoute(), AntSolutions):
+            points = list(set([(x.iterCount, x.avgTime) for x in self.parsedData if
+                               x.alpha == par[0] and x.beta == par[1] and x.antCount == par[2]]))
+            plt.xlabel("Liczba iteracji")
+        plt.ylabel("Czas [s]")
+        points.sort(key=lambda a: a[0])
+        points = np.array(points)
+        ax.plot(points[:, 0], points[:, 1], marker=".",
+                label=f"c={par[0] * 100}% m={par[1] * 100}% p={par[2]}" if isinstance(self.bestRoute(),
+                                                                                      GeneticSolutions)
+                else f"a={par[0]} b={par[1]} m={par[2]}")
+        plt.xticks(ticks=points[:, 0])
+        plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+        plt.tight_layout()
+        plt.pause(0.1)
+        if path is None:
+            plt.show()
+        else:
+            fig.savefig(path)
+            plt.close(fig)
+
+    # def scoreGraph(self, par=None, path=None):
+    #     if par is None:
+    #         par = self.bestRoute().param()
+    #     fig, ax = plt.subplots(nrows=1, ncols=1)
+    #     if isinstance(self.bestRoute(), GeneticSolutions):
+    #         generations = list(set([x.genCount for x in self.parsedData if
+    #                                 x.crossRatio == par[0] and x.mutRatio == par[1] and x.popCount == par[2]]))
+    #         generations.sort()
+    #         min_list = [min([x.score for x in self.parsedData if
+    #                          x.crossRatio == par[0] and x.mutRatio == par[1] and
+    #                          x.popCount == par[2] and x.genCount == y]) for y in generations]
+    #         max_list = [max([x.score for x in self.parsedData if
+    #                          x.crossRatio == par[0] and x.mutRatio == par[1] and
+    #                          x.popCount == par[2] and x.genCount == y]) for y in generations]
+    #
+    #         avg_list = [np.average([x.score for x in self.parsedData if
+    #                                 x.crossRatio == par[0] and x.mutRatio == par[1] and
+    #                                 x.popCount == par[2] and x.genCount == y]) for y in generations]
+    #
+    #         ax.plot(generations, min_list, marker=".", label=f"Minimum")
+    #         ax.plot(generations, avg_list, marker=".", label=f"Średnia")
+    #         ax.plot(generations, max_list, marker=".", label=f"Maksimum")
+    #
+    #         # plt.xticks(ticks=generations)
+    #         plt.xlabel("Liczba generacji")
+    #         plt.ylabel("Dystans")
+    #         # plt.grid(linestyle='--')
+    #         plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+    #         plt.tight_layout()
+    #         plt.pause(0.1)
+    #         if path is None:
+    #             plt.show()
+    #         else:
+    #             fig.savefig(path)
+    #             plt.close(fig)
 
     def scoreGraph(self, par=None, path=None):
         if par is None:
@@ -194,30 +281,39 @@ class Data:
             avg_list = [np.average([x.score for x in self.parsedData if
                                     x.crossRatio == par[0] and x.mutRatio == par[1] and
                                     x.popCount == par[2] and x.genCount == y]) for y in generations]
-
+            plt.xlabel("Liczba generacji")
             ax.plot(generations, min_list, marker=".", label=f"Minimum")
             ax.plot(generations, avg_list, marker=".", label=f"Średnia")
             ax.plot(generations, max_list, marker=".", label=f"Maksimum")
 
-            # plt.xticks(ticks=generations)
-            plt.xlabel("Liczba generacji")
-            plt.ylabel("Dystans")
-            # plt.grid(linestyle='--')
-            plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-            plt.tight_layout()
-            plt.pause(0.1)
-            if path is None:
-                plt.show()
-            else:
-                fig.savefig(path)
-                plt.close(fig)
+        if isinstance(self.bestRoute(), AntSolutions):
+            iterations = list(set([x.iterCount for x in self.parsedData if
+                                   x.alpha == par[0] and x.beta == par[1] and x.antCount == par[2]]))
+            iterations.sort()
+            min_list = [min([x.score for x in self.parsedData if
+                             x.alpha == par[0] and x.beta == par[1] and
+                             x.antCount == par[2] and x.iterCount == y]) for y in iterations]
+            max_list = [max([x.score for x in self.parsedData if
+                             x.alpha == par[0] and x.beta == par[1] and
+                             x.antCount == par[2] and x.iterCount == y]) for y in iterations]
 
-    # def _lostCapacity(self, list):
-    #     result = 0
-    #     for element in list:
-    #         result += sum([self.metaData['CAPACITY'] - sum([self.demand[node] for node in subroute]) for subroute in
-    #                        element.subRoutes])
-    #     return result / len(list)
+            avg_list = [np.average([x.score for x in self.parsedData if
+                                    x.alpha == par[0] and x.beta == par[1] and
+                                    x.antCount == par[2] and x.iterCount == y]) for y in iterations]
+            plt.xlabel("Liczba iteracji")
+            ax.plot(iterations, min_list, marker=".", label=f"Minimum")
+            ax.plot(iterations, avg_list, marker=".", label=f"Średnia")
+            ax.plot(iterations, max_list, marker=".", label=f"Maksimum")
+
+        plt.ylabel("Dystans")
+        plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+        plt.tight_layout()
+        plt.pause(0.1)
+        if path is None:
+            plt.show()
+        else:
+            fig.savefig(path)
+            plt.close(fig)
 
     def _lostCapacity(self, list):
         result = 0
@@ -226,6 +322,36 @@ class Data:
                 [(self.metaData['CAPACITY'] - sum([self.demand[node] for node in subroute])) / self.metaData["CAPACITY"]
                  for subroute in element.subRoutes]) / len(element.subRoutes)
         return 100 * result / len(list)
+
+    # def lostCapacityGraph(self, par=None, path=None):
+    #     if par is None:
+    #         par = self.bestRoute().param()
+    #     fig, ax = plt.subplots(nrows=1, ncols=1)
+    #     if isinstance(self.bestRoute(), GeneticSolutions):
+    #         popCount = list(set([x.popCount for x in self.parsedData]))
+    #         popCount.sort()
+    #         genCount = list(set([x.genCount for x in self.parsedData]))
+    #         genCount.sort()
+    #         spacer = -len(genCount) // 2
+    #         xaxis = [x for x in range(10, len(genCount) * 10 + 1, 10)]
+    #         for pop in popCount:
+    #             capLoss = [self._lostCapacity(
+    #                 [sol for sol in self.parsedData if sol.crossRatio == par[0] and sol.mutRatio == par[1] and
+    #                  sol.popCount == pop and sol.genCount == x]) for x in genCount]
+    #             ax.bar([x + spacer for x in xaxis], capLoss, label=f"{pop} osobników", width=1)
+    #             spacer += 1
+    #         plt.xticks(ticks=xaxis, labels=[str(x) for x in genCount])
+    #         plt.legend(bbox_to_anchor=(0.5, 1.3), loc='upper center')
+    #         plt.ylabel("Pojemność [%]")
+    #         plt.xlabel("Liczba generacji")
+    #         plt.tight_layout()
+    #         plt.pause(0.1)
+    #         if path is None:
+    #             plt.show()
+    #         else:
+    #             fig.savefig(path)
+    #             plt.close(fig)
+
     def lostCapacityGraph(self, par=None, path=None):
         if par is None:
             par = self.bestRoute().param()
@@ -241,29 +367,71 @@ class Data:
                 capLoss = [self._lostCapacity(
                     [sol for sol in self.parsedData if sol.crossRatio == par[0] and sol.mutRatio == par[1] and
                      sol.popCount == pop and sol.genCount == x]) for x in genCount]
-                ax.bar([x + spacer for x in xaxis], capLoss, label=f"{pop} osobników", width=1)
+                ax.bar([x + spacer for x in xaxis], capLoss, label=f"Populacja {pop}", width=1)
                 spacer += 1
             plt.xticks(ticks=xaxis, labels=[str(x) for x in genCount])
-            plt.legend(bbox_to_anchor=(0.5, 1.3), loc='upper center')
-            plt.ylabel("Pojemność [%]")
             plt.xlabel("Liczba generacji")
-            plt.tight_layout()
-            plt.pause(0.1)
-            if path is None:
-                plt.show()
-            else:
-                fig.savefig(path)
-                plt.close(fig)
+
+        if isinstance(self.bestRoute(), AntSolutions):
+            ants = list(set([x.antCount for x in self.parsedData]))
+            ants.sort()
+            iterations = list(set([x.iterCount for x in self.parsedData]))
+            iterations.sort()
+            spacer = -len(iterations) // 2
+            xaxis = [x for x in range(10, len(iterations) * 10 + 1, 10)]
+            for ant in ants:
+                capLoss = [
+                    self._lostCapacity([sol for sol in self.parsedData if sol.alpha == par[0] and sol.beta == par[1] and
+                                        sol.antCount == ant and sol.iterCount == x]) for x in iterations]
+                ax.bar([x + spacer for x in xaxis], capLoss, label=f"Liczba mrówek {ant}", width=1)
+                spacer += 1
+            plt.xticks(ticks=xaxis, labels=[str(x) for x in iterations])
+            plt.xlabel("Liczba iteracji")
+
+        plt.ylabel("Pojemność [%]")
+        plt.legend(bbox_to_anchor=(0.5, 1.3), loc='upper center')
+        plt.tight_layout()
+        plt.pause(0.1)
+        if path is None:
+            plt.show()
+        else:
+            fig.savefig(path)
+            plt.close(fig)
+
+
+# def subRouteToRouteGraph(dataList, path=None):
+#     fig, ax = plt.subplots(nrows=1, ncols=1)
+#     if isinstance(dataList[0].bestRoute(), GeneticSolutions):
+#         for dataset in dataList:
+#             points = [[x.score, max([dataset.fitness(subroute) for subroute in x.subRoutes])] for x in
+#                       dataset.parsedData]
+#             points = np.array(points)
+#             ax.scatter(points[:, 0], points[:, 1], marker=".",
+#                        label=f"K={dataset.parsedData[0].crossMode} M={dataset.parsedData[0].mutMode}")
+#     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+#     plt.ylabel("Trasa")
+#     plt.xlabel("Całowita długość")
+#     plt.tight_layout()
+#     plt.pause(0.1)
+#     if path is None:
+#         plt.show()
+#     else:
+#         fig.savefig(path)
+#         plt.close(fig)
+
 
 def subRouteToRouteGraph(dataList, path=None):
     fig, ax = plt.subplots(nrows=1, ncols=1)
-    if isinstance(dataList[0].bestRoute(), GeneticSolutions):
-        for dataset in dataList:
-            points = [[x.score, max([dataset.fitness(subroute) for subroute in x.subRoutes])] for x in
-                      dataset.parsedData]
-            points = np.array(points)
+
+    for dataset in dataList:
+        points = [[x.score, max([dataset.fitness(subroute) for subroute in x.subRoutes])] for x in dataset.parsedData]
+        points = np.array(points)
+        if isinstance(dataList[0].bestRoute(), GeneticSolutions):
             ax.scatter(points[:, 0], points[:, 1], marker=".",
                        label=f"K={dataset.parsedData[0].crossMode} M={dataset.parsedData[0].mutMode}")
+        if isinstance(dataList[0].bestRoute(), AntSolutions):
+            ax.scatter(points[:, 0], points[:, 1], marker=".",
+                       label=f"a={dataset.parsedData[0].alpha} b={dataset.parsedData[0].beta}")
     plt.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     plt.ylabel("Trasa")
     plt.xlabel("Całowita długość")
@@ -292,12 +460,50 @@ def parseData(filePath, DIR_PATH=DIR_PATH_LOCAL, mode: ALGTYPE = ALGTYPE.GENETIC
                              float(x['@crossOption']), float(x['@mutationOption']), int(x['@population']),
                              int(x['@generationCount'])) for x in rawDataDict['results']['test'] for path in x['route']]
     elif mode == ALGTYPE.ANT:
-        pass
+        rawDataDict['results']['test'] = [rawDataDict['results']['test']]
+        # res = [AntSolutions(float(x['@avgTime']), float(path['@score']), ast.literal_eval(path['#text']), cross, mut,
+        #                      float(x['@crossOption']), float(x['@mutationOption']), int(x['@population']),
+        #                      int(x['@generationCount'])) for x in rawDataDict['results']['test'] for path in x['route']]
+    return Data(metaData, nodes, demand, res)
+
+
+def parseData(filePath, DIR_PATH=DIR_PATH_LOCAL, mode: ALGTYPE = ALGTYPE.GENETIC):
+    """Parse generated data from tests."""
+    metaData, nodes, demand, res = 4 * [None]
+    if mode == ALGTYPE.GENETIC:
+        rawDataFileName = filePath.split("\\")[-1].split("_")[0][6:]
+        cross = int(filePath.split("\\")[-1].split("_")[1])
+        mut = int(filePath.split("\\")[-1].split("_")[2][0])
+        metaData, nodes, demand = parseRawData(glob.glob(f"{DIR_PATH}{rawDataFileName}.vrp", recursive=True)[0])
+        with open(filePath, "r") as f:
+            rawDataDict = xmltodict.parse(f.read())
+        res = []
+        rawDataDict['results']['test'] = rawDataDict['results']['test'] if isinstance(rawDataDict['results']['test'],
+                                                                                      list) \
+            else [rawDataDict['results']['test']]
+        res = [
+            GeneticSolutions(float(x['@avgTime']), float(path['@score']), ast.literal_eval(path['#text']), cross, mut,
+                             float(x['@crossOption']), float(x['@mutationOption']), int(x['@population']),
+                             int(x['@generationCount'])) for x in rawDataDict['results']['test'] for path in x['route']]
+    elif mode == ALGTYPE.ANT:
+        rawDataFileName = filePath.split("\\")[-1].split("_")[0]
+        alpha = int(filePath.split("\\")[-1].split("_")[1])
+        beta = int(filePath.split("\\")[-1].split("_")[2][0])
+        metaData, nodes, demand = parseRawData(glob.glob(f"{DIR_PATH}{rawDataFileName}.vrp", recursive=True)[0])
+        with open(filePath, "r") as f:
+            rawDataDict = xmltodict.parse(f.read())
+        res = []
+        rawDataDict['results']['test'] = rawDataDict['results']['test'] if isinstance(rawDataDict['results']['test'],
+                                                                                      list) \
+            else [rawDataDict['results']['test']]
+        res = [AntSolutions(float(x['@avgTime']), float(path['@score']), ast.literal_eval(path['#text']),
+                            float(x['@alpha']),
+                            float(x['@beta']), int(x['@antCount']), int(x['@iterationCount']))
+               for x in rawDataDict['results']['test'] for path in x['route']]
     return Data(metaData, nodes, demand, res)
 
 
 if __name__ == "__main__":
-
     # christofides resultCMT1 ; resultCMT12
 
     # results = [parseData("..\\cmtResultGen\\iter_20\\resultCMT1_1_2.xml", mode=ALGTYPE.GENETIC)]

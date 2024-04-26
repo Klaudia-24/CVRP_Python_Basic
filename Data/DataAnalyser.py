@@ -369,7 +369,7 @@ class Data:
                 capLoss = [self._lostCapacity(
                     [sol for sol in self.parsedData if sol.crossRatio == par[0] and sol.mutRatio == par[1] and
                      sol.popCount == pop and sol.genCount == x]) for x in genCount]
-                ax.bar([x + spacer for x in xaxis], capLoss, label=f"Populacja {pop}", width=1)
+                ax.bar([x + spacer for x in xaxis], capLoss, label=f"{pop} osobników", width=1)
                 spacer += 1
             plt.xticks(ticks=xaxis, labels=[str(x) for x in genCount])
             plt.xlabel("Liczba generacji")
@@ -385,7 +385,7 @@ class Data:
                 capLoss = [
                     self._lostCapacity([sol for sol in self.parsedData if sol.alpha == par[0] and sol.beta == par[1] and
                                         sol.antCount == ant and sol.iterCount == x]) for x in iterations]
-                ax.bar([x + spacer for x in xaxis], capLoss, label=f"Liczba mrówek {ant}", width=1)
+                ax.bar([x + spacer for x in xaxis], capLoss, label=f"{ant} mrówek", width=1)
                 spacer += 1
             plt.xticks(ticks=xaxis, labels=[str(x) for x in iterations])
             plt.xlabel("Liczba iteracji")

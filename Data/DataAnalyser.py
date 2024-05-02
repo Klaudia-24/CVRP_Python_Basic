@@ -488,7 +488,7 @@ def parseData(filePath, DIR_PATH=DIR_PATH_LOCAL, mode: ALGTYPE = ALGTYPE.GENETIC
                              float(x['@crossOption']), float(x['@mutationOption']), int(x['@population']),
                              int(x['@generationCount'])) for x in rawDataDict['results']['test'] for path in x['route']]
     elif mode == ALGTYPE.ANT:
-        rawDataFileName = filePath.split("\\")[-1].split("_")[0]
+        rawDataFileName = filePath.split("\\")[-1].split("_")[0][6:]
         alpha = int(filePath.split("\\")[-1].split("_")[1])
         beta = int(filePath.split("\\")[-1].split("_")[2][0])
         metaData, nodes, demand = parseRawData(glob.glob(f"{DIR_PATH}{rawDataFileName}.vrp", recursive=True)[0])
@@ -509,117 +509,125 @@ if __name__ == "__main__":
 
 # christofides      resultCMT1  GENETIC
 
-    # results = [parseData("..\\ParsedData\\Genetic\\iter_20\\resultCMT1_1_2.xml", mode=ALGTYPE.GENETIC)]
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultCMT1_1_1.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultCMT1_2_2.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultCMT1_2_1.xml", mode=ALGTYPE.GENETIC))
-
+    # results = [parseData(".\\ParsedData\\Genetic\\iter_20\\resultCMT1_1_2.xml", mode=ALGTYPE.GENETIC)]
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultCMT1_1_1.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultCMT1_2_2.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultCMT1_2_1.xml", mode=ALGTYPE.GENETIC))
+    #
+    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT1_routsBest.jpg")
+    #
     # results = [parseData(".\\ParsedData\\Genetic\\resultCMT1_1_2.xml", mode=ALGTYPE.GENETIC)]
     # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT1_1_1.xml", mode=ALGTYPE.GENETIC))
     # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT1_2_2.xml", mode=ALGTYPE.GENETIC))
     # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT1_2_1.xml", mode=ALGTYPE.GENETIC))
-
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT1_routsBest.jpg")
+    #
     # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT1_routsAll.jpg")
 
 # christofides      resultCMT12  GENETIC
 
-    # results = [parseData("..\\ParsedData\\Genetic\\iter_20\\resultCMT12_1_2.xml", mode=ALGTYPE.GENETIC)]
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultCMT12_1_1.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultCMT12_2_2.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultCMT12_2_1.xml", mode=ALGTYPE.GENETIC))
-
+    # results = [parseData(".\\ParsedData\\Genetic\\iter_20\\resultCMT12_1_2.xml", mode=ALGTYPE.GENETIC)]
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultCMT12_1_1.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultCMT12_2_2.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultCMT12_2_1.xml", mode=ALGTYPE.GENETIC))
+    #
+    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT12_routsBest.jpg")
+    #
     # results = [parseData(".\\ParsedData\\Genetic\\resultCMT12_1_2.xml", mode=ALGTYPE.GENETIC)]
     # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT12_1_1.xml", mode=ALGTYPE.GENETIC))
     # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT12_2_2.xml", mode=ALGTYPE.GENETIC))
     # results.append(parseData(".\\ParsedData\\Genetic\\resultCMT12_2_1.xml", mode=ALGTYPE.GENETIC))
-
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT12_routsBest.jpg")
+    #
     # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultCMT12_routsAll.jpg")
 
 # christofides      resultCMT1  ANT
 
-    # results = [parseData("..\\ParsedData\\Ant\\iter_20\\resultCMT1_1_1.xml", mode=ALGTYPE.ANT)]
-    # results.append(parseData("..\\ParsedData\\Ant\\iter_20\\resultCMT1_1_3.xml", mode=ALGTYPE.ANT))
-    # results.append(parseData("..\\ParsedData\\Ant\\iter_20\\resultCMT1_3_1.xml", mode=ALGTYPE.ANT))
-
+    # results = [parseData(".\\ParsedData\\Ant\\iter_20\\resultCMT1_1_1.xml", mode=ALGTYPE.ANT)]
+    # results.append(parseData(".\\ParsedData\\Ant\\iter_20\\resultCMT1_1_3.xml", mode=ALGTYPE.ANT))
+    # results.append(parseData(".\\ParsedData\\Ant\\iter_20\\resultCMT1_3_1.xml", mode=ALGTYPE.ANT))
+    #
+    # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultCMT1_routsBest.jpg")
+    #
     # results = [parseData(".\\ParsedData\\Ant\\resultCMT1_1_1.xml", mode=ALGTYPE.ANT)]
     # results.append(parseData(".\\ParsedData\\Ant\\resultCMT1_1_3.xml", mode=ALGTYPE.ANT))
     # results.append(parseData(".\\ParsedData\\Ant\\resultCMT1_3_1.xml", mode=ALGTYPE.ANT))
-
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultCMT1_routsBest.jpg")
+    #
     # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultCMT1_routsAll.jpg")
 
 # christofides      resultCMT12  ANT
 
-    # results = [parseData("..\\ParsedData\\Ant\\iter_20\\resultCMT12_1_1.xml", mode=ALGTYPE.ANT)]
-    # results.append(parseData("..\\ParsedData\\Ant\\iter_20\\resultCMT12_1_3.xml", mode=ALGTYPE.ANT))
-    # results.append(parseData("..\\ParsedData\\Ant\\iter_20\\resultCMT12_3_1.xml", mode=ALGTYPE.ANT))
-
+    # results = [parseData(".\\ParsedData\\Ant\\iter_20\\resultCMT12_1_1.xml", mode=ALGTYPE.ANT)]
+    # results.append(parseData(".\\ParsedData\\Ant\\iter_20\\resultCMT12_1_3.xml", mode=ALGTYPE.ANT))
+    # results.append(parseData(".\\ParsedData\\Ant\\iter_20\\resultCMT12_3_1.xml", mode=ALGTYPE.ANT))
+    #
+    # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultCMT12_routsBest.jpg")
+    #
     # results = [parseData(".\\ParsedData\\Ant\\resultCMT12_1_1.xml", mode=ALGTYPE.ANT)]
     # results.append(parseData(".\\ParsedData\\Ant\\resultCMT12_1_3.xml", mode=ALGTYPE.ANT))
     # results.append(parseData(".\\ParsedData\\Ant\\resultCMT12_3_1.xml", mode=ALGTYPE.ANT))
-
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultCMT12_routsBest.jpg")
+    #
     # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultCMT12_routsAll.jpg")
 
 
 # augerat_A     A-n80-k10  GENETIC
 
-    # results = [parseData("..\\ParsedData\\Genetic\\iter_20\\resultA-n80-k10_1_2.xml", mode=ALGTYPE.GENETIC)]
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultA-n80-k10_1_1.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultA-n80-k10_2_2.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultA-n80-k10_2_1.xml", mode=ALGTYPE.GENETIC))
-
+    # results = [parseData(".\\ParsedData\\Genetic\\iter_20\\resultA-n80-k10_1_2.xml", mode=ALGTYPE.GENETIC)]
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultA-n80-k10_1_1.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultA-n80-k10_2_2.xml", mode=ALGTYPE.GENETIC))
+    # results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultA-n80-k10_2_1.xml", mode=ALGTYPE.GENETIC))
+    #
+    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultA-n80-k10_routsBest.jpg")
+    #
     # results = [parseData(".\\ParsedData\\Genetic\\resultA-n80-k10_1_2.xml", mode=ALGTYPE.GENETIC)]
     # results.append(parseData(".\\ParsedData\\Genetic\\resultA-n80-k10_1_1.xml", mode=ALGTYPE.GENETIC))
     # results.append(parseData(".\\ParsedData\\Genetic\\resultA-n80-k10_2_2.xml", mode=ALGTYPE.GENETIC))
     # results.append(parseData(".\\ParsedData\\Genetic\\resultA-n80-k10_2_1.xml", mode=ALGTYPE.GENETIC))
-
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultA-n80-k10_routsBest.jpg")
+    #
     # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultA-n80-k10_routsAll.jpg")
 
 # augerat_A     A-n80-k10  ANT
 
-    # results = [parseData("..\\ParsedData\\Ant\\iter_20\\resultA-n80-k10_1_1.xml", mode=ALGTYPE.ANT)]
-    # results.append(parseData("..\\ParsedData\\Ant\\iter_20\\resultA-n80-k10_1_3.xml", mode=ALGTYPE.ANT))
-    # results.append(parseData("..\\ParsedData\\Ant\\iter_20\\resultA-n80-k10_3_1.xml", mode=ALGTYPE.ANT))
-
+    # results = [parseData(".\\ParsedData\\Ant\\iter_20\\resultA-n80-k10_1_1.xml", mode=ALGTYPE.ANT)]
+    # results.append(parseData(".\\ParsedData\\Ant\\iter_20\\resultA-n80-k10_1_3.xml", mode=ALGTYPE.ANT))
+    # results.append(parseData(".\\ParsedData\\Ant\\iter_20\\resultA-n80-k10_3_1.xml", mode=ALGTYPE.ANT))
+    #
+    # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultA-n80-k10_routsBest.jpg")
+    #
     # results = [parseData(".\\ParsedData\\Ant\\resultA-n80-k10_1_1.xml", mode=ALGTYPE.ANT)]
     # results.append(parseData(".\\ParsedData\\Ant\\resultA-n80-k10_1_3.xml", mode=ALGTYPE.ANT))
     # results.append(parseData(".\\ParsedData\\Ant\\resultA-n80-k10_3_1.xml", mode=ALGTYPE.ANT))
-
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultA-n80-k10_routsBest.jpg")
+    #
     # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultA-n80-k10_routsAll.jpg")
 
 
 # augerat_B     B-n78-k10  GENETIC
 
-    # results = [parseData("..\\ParsedData\\Genetic\\iter_20\\resultB-n78-k10_1_2.xml", mode=ALGTYPE.GENETIC)]
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultB-n78-k10_1_1.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultB-n78-k10_2_2.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData("..\\ParsedData\\Genetic\\iter_20\\resultB-n78-k10_2_1.xml", mode=ALGTYPE.GENETIC))
+    results = [parseData(".\\ParsedData\\Genetic\\iter_20\\resultB-n78-k10_1_2.xml", mode=ALGTYPE.GENETIC)]
+    results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultB-n78-k10_1_1.xml", mode=ALGTYPE.GENETIC))
+    results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultB-n78-k10_2_2.xml", mode=ALGTYPE.GENETIC))
+    results.append(parseData(".\\ParsedData\\Genetic\\iter_20\\resultB-n78-k10_2_1.xml", mode=ALGTYPE.GENETIC))
 
-    # results = [parseData(".\\ParsedData\\Genetic\\resultB-n78-k10_1_2.xml", mode=ALGTYPE.GENETIC)]
-    # results.append(parseData(".\\ParsedData\\Genetic\\resultB-n78-k10_1_1.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData(".\\ParsedData\\Genetic\\resultB-n78-k10_2_2.xml", mode=ALGTYPE.GENETIC))
-    # results.append(parseData(".\\ParsedData\\Genetic\\resultB-n78-k10_2_1.xml", mode=ALGTYPE.GENETIC))
+    subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultB-n78-k10_routsBest.jpg")
 
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultB-n78-k10_routsBest.jpg")
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultB-n78-k10_routsAll.jpg")
+    results = [parseData(".\\ParsedData\\Genetic\\resultB-n78-k10_1_2.xml", mode=ALGTYPE.GENETIC)]
+    results.append(parseData(".\\ParsedData\\Genetic\\resultB-n78-k10_1_1.xml", mode=ALGTYPE.GENETIC))
+    results.append(parseData(".\\ParsedData\\Genetic\\resultB-n78-k10_2_2.xml", mode=ALGTYPE.GENETIC))
+    results.append(parseData(".\\ParsedData\\Genetic\\resultB-n78-k10_2_1.xml", mode=ALGTYPE.GENETIC))
+
+    subRouteToRouteGraph(results, path=f"..\\Results\\Genetic\\resultB-n78-k10_routsAll.jpg")
 
 
 # augerat_B     B-n78-k10  ANT
 
-    # results = [parseData("..\\ParsedData\\Ant\\iter_20\\resultB-n78-k10_1_1.xml", mode=ALGTYPE.ANT)]
-    # results.append(parseData("..\\ParsedData\\Ant\\iter_20\\resultB-n78-k10_1_3.xml", mode=ALGTYPE.ANT))
-    # results.append(parseData("..\\ParsedData\\Ant\\iter_20\\resultB-n78-k10_3_1.xml", mode=ALGTYPE.ANT))
-
+    # results = [parseData(".\\ParsedData\\Ant\\iter_20\\resultB-n78-k10_1_1.xml", mode=ALGTYPE.ANT)]
+    # results.append(parseData(".\\ParsedData\\Ant\\iter_20\\resultB-n78-k10_1_3.xml", mode=ALGTYPE.ANT))
+    # results.append(parseData(".\\ParsedData\\Ant\\iter_20\\resultB-n78-k10_3_1.xml", mode=ALGTYPE.ANT))
+    #
+    # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultB-n78-k10_routsBest.jpg")
+    #
     # results = [parseData(".\\ParsedData\\Ant\\resultB-n78-k10_1_1.xml", mode=ALGTYPE.ANT)]
     # results.append(parseData(".\\ParsedData\\Ant\\resultB-n78-k10_1_3.xml", mode=ALGTYPE.ANT))
     # results.append(parseData(".\\ParsedData\\Ant\\resultB-n78-k10_3_1.xml", mode=ALGTYPE.ANT))
-
-    # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultB-n78-k10_routsBest.jpg")
+    #
     # subRouteToRouteGraph(results, path=f"..\\Results\\Ant\\resultB-n78-k10_routsAll.jpg")
 
 

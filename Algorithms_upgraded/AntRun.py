@@ -11,9 +11,10 @@ dir_path_folder = "..\\Data\\RawData\\**\\"
 SOL_PATH = "..\Data\ParsedData\**\*.*"
 
 #                                            antCount            iterCount
-# ANT_PARAMETERS = list(itertools.product(*[[10, 50, 100, 150], [20, 50, 100, 150, 250], [1], [1], [0.5], [1]]))
+ANT_PARAMETERS = list(itertools.product(*[[10, 50, 100, 150], [20, 50, 100, 150, 250], [1], [1], [0.5], [1]]))
+# ANT_PARAMETERS = list(itertools.product(*[[50], [20], [3], [1], [0.5], [1]]))
 
-ANT_PARAMETERS = list(itertools.product(*[[10, 50, 100, 150], [20, 50, 100, 150, 250], [3], [1], [0.5], [1]]))
+# TEST_ITERATIONS = 20
 TEST_ITERATIONS = 5
 
 
@@ -24,7 +25,7 @@ def main():
         ant = Ant(metaData, nodes, demand, 0, 0, 0, 0, 0, 0, testIterCount=TEST_ITERATIONS)
 
         # resultFileName = f"../Data/ParsedData/Ant/{resultName}_{ant.alpha}_{ant.beta}.xml"
-        resultFileName = f"../Data/ParsedData/Ant/{resultName}_3_1.xml"
+        resultFileName = f"../Data/ParsedData/Ant/result{resultName}_3_1.xml"
 
         resultsFile = open(resultFileName, "a+")
         resultsFile.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -83,6 +84,7 @@ def analyseData(mode: ALGTYPE):
             i += 1
         if i != 0:
             resultName += f"_({i})"
+
         result.bestRouteGraph(f"..\\Results\\{folder}\\{resultName}_graph.jpg")
         result.timeGraph(path=f"..\\Results\\{folder}\\{resultName}_time.jpg")
         result.scoreGraph(path=f"..\\Results\\{folder}\\{resultName}_score.jpg")
@@ -91,6 +93,6 @@ def analyseData(mode: ALGTYPE):
 
 
 if __name__ == "__main__":
-    main()
+    # main()
 
-    # analyseData(ALGTYPE.ANT)
+    analyseData(ALGTYPE.ANT)
